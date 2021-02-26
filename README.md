@@ -1,0 +1,3 @@
+- Clone Project
+- `yarn install` Install dependencies
+- `yarn serve` Run project
