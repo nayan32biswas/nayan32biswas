@@ -42,7 +42,7 @@ celerybeat-schedule.*
 **.map
 
 .DS_Store
-# dist
+dist
 dist-ssr
 *.local
 
@@ -59,7 +59,7 @@ dist-ssr
 
 # ============================== VUE ==============================
 .DS_Store
-# **/dist
+**/dist
 # Log files
 npm-debug.log*
 yarn-debug.log*
