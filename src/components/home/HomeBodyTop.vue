@@ -41,9 +41,9 @@ export default class HomeBodyTop extends Vue {
   //   fileContent = mdFile;
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .top-body {
-  background-color: #e28344;
+  background-color: $nav-mid-color;
 }
 .body-title {
   text-align: center;

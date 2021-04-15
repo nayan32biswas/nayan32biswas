@@ -21,3 +21,4 @@ export default class BlogDetails extends Vue {
   //   fileContent = mdFile;
 }
 </script>
+<style lang="sass" scoped></style>

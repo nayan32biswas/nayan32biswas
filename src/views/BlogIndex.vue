@@ -16,3 +16,4 @@ export default class BlogIndex extends Vue {
   //   fileContent = mdFile;
 }
 </script>
+<style lang="sass" scoped></style>

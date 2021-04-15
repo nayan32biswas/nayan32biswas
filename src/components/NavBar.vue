@@ -4,8 +4,8 @@
       <router-link :to="{ name: 'Home' }">Nayan.</router-link>
     </div>
     <div class="menu">
-      <ul>
-        <li class="item">
+      <ul v-if="!mobileNav">
+        <li class="item" v-if="!mobileNav">
           <span>power-search</span>
         </li>
         <li class="item">
@@ -39,6 +39,15 @@ import { Options, Vue } from "vue-class-component";
 })
 export default class NavBar extends Vue {
   msg!: string;
+  mobileNav = false;
+
+  created() {
+    this.handleView();
+  }
+  handleView() {
+    this.mobileNav = window.innerWidth <= 768;
+    window.addEventListener("resize", this.handleView);
+  }
 }
 </script>
 
@@ -51,6 +60,7 @@ export default class NavBar extends Vue {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: $nav-top-color;
 }
 .menu {
   float: left;

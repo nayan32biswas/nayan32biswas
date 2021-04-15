@@ -12,3 +12,4 @@ export default class Resume extends Vue {
   //   fileContent = mdFile;
 }
 </script>
+<style lang="sass" scoped></style>
