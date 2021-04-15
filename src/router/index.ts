@@ -7,15 +7,36 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("../views/Home.vue"),
   },
   {
-    path: "/doc",
-    name: "VueDoc",
-    component: () => import("../views/VueDoc.vue"),
+    path: "/blog-index",
+    name: "BlogIndex",
+    component: () => import("../views/BlogIndex.vue"),
   },
   {
-    path: "/blogs",
-    name: "BlogIndexPage",
-    component: () => import("../views/BlogIndexPage.vue"),
+    path: "/blog-index/:filename",
+    name: "BlogDetails",
+    component: () => import("../views/BlogDetails.vue"),
   },
+  {
+    path: "/work",
+    name: "Work",
+    component: () => import("../views/Work.vue"),
+  },
+  {
+    path: "/skill",
+    name: "Skill",
+    component: () => import("../views/Skill.vue"),
+  },
+  {
+    path: "/resume",
+    name: "Resume",
+    component: () => import("../views/Resume.vue"),
+  },
+  {
+    path: "/contact",
+    name: "Contact",
+    component: () => import("../views/Contact.vue"),
+  },
+
   {
     path: "/about",
     name: "About",

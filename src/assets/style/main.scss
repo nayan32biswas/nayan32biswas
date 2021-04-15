@@ -1,0 +1,79 @@
+@import "./colors";
+@import "./_fonts";
+@import "./variables";
+@import "./mixins";
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  height: 100%;
+  margin: auto;
+}
+a {
+  text-decoration: none;
+}
+
+.container {
+  margin: auto;
+  width: 80%;
+  max-width: 1200px;
+
+  @media (max-width: 993px) {
+    width: 85%;
+  }
+  @media (max-width: 768px) {
+    width: 90%;
+  }
+}
+.top-bar {
+  padding: 2rem 0;
+  background: $bg-main;
+}
+
+.top-bar-wrapper {
+  width: 75%;
+  margin: 0 auto;
+  @media (max-width: 1199.98px) {
+    width: 85%;
+  }
+  @media (max-width: 991.98px) {
+    width: 95%;
+  }
+  .title {
+    font-family: $secondary-font;
+    color: #333333;
+    @include responsive-font(1.1vw, 16px, 22px, 16px);
+  }
+
+  .review {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    p {
+      margin-bottom: 0;
+      font-family: $secondary-font;
+      color: #333333;
+      @include responsive-font(1.1vw, 16px, 22px, 16px);
+    }
+  }
+}
+
+textarea:focus,
+textarea.form-control:focus,
+input.form-control:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+[type="text"].form-control:focus,
+[type="password"].form-control:focus,
+[type="email"].form-control:focus,
+[type="tel"].form-control:focus,
+[contenteditable].form-control:focus {
+  box-shadow: none !important;
+  border-color: #dddce0;
+}
+// iframe

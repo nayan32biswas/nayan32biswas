@@ -1,6 +1,6 @@
 <template>
   <div class="Blog">
-    <h1>Blog Index</h1>
+    <h1>BlogDetails</h1>
     <!-- <div><VueShowdown :markdown="getContent()"></VueShowdown></div> -->
   </div>
 </template>
@@ -17,7 +17,7 @@ import VueShowdown from "vue-showdown";
     VueShowdown,
   },
 })
-export default class Home extends Vue {
+export default class BlogDetails extends Vue {
   //   fileContent = mdFile;
 }
 </script>
