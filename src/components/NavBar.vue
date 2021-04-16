@@ -5,8 +5,8 @@
     </div>
     <div class="menu">
       <ul v-if="!mobileNav">
-        <li class="item" v-if="!mobileNav">
-          <span>power-search</span>
+        <li class="item power-search" v-if="!mobileNav">
+          <img src="@/assets/svg/volt.svg" alt="search" />
         </li>
         <li class="item">
           <router-link :to="{ name: 'BlogIndex' }">Blog</router-link>
@@ -75,10 +75,16 @@ export default class NavBar extends Vue {
   .item {
     padding: 0 5px;
   }
+  a {
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
 }
-a {
-  &.router-link-exact-active {
-    color: #42b983;
+.power-search {
+  img {
+    border-radius: 50% solid black;
+    padding: 5px;
   }
 }
 </style>
