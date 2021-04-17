@@ -47,7 +47,7 @@ export default class HomeBodyTop extends Vue {
 }
 .body-title {
   text-align: center;
-  padding: 20% 0;
+  padding: 10% 0;
 }
 .contact {
   display: flex;

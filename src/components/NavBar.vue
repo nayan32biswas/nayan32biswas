@@ -4,27 +4,66 @@
       <router-link :to="{ name: 'Home' }">Nayan.</router-link>
     </div>
     <div class="menu">
-      <ul v-if="!mobileNav">
-        <li class="item power-search" v-if="!mobileNav">
-          <img src="@/assets/svg/volt.svg" alt="search" />
-        </li>
-        <li class="item">
-          <router-link :to="{ name: 'BlogIndex' }">Blog</router-link>
-        </li>
-        <li class="item">
-          <router-link :to="{ name: 'Work' }">Work</router-link>
-        </li>
-        <li class="item">
-          <router-link :to="{ name: 'Skill' }">Skill</router-link>
-        </li>
+      <nav v-if="!mobileNav" class="desktop-menu">
+        <ul>
+          <li class="nav-item power-search">
+            <img src="@/assets/icon/volt.svg" alt="search" />
+          </li>
+          <li class="nav-item">
+            <router-link :to="{ name: 'BlogIndex' }">Blog</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link :to="{ name: 'Work' }">Work</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link :to="{ name: 'Skill' }">Skill</router-link>
+          </li>
 
-        <li class="item">
-          <router-link :to="{ name: 'Resume' }">Resume</router-link>
-        </li>
-        <li class="item">
-          <router-link :to="{ name: 'Contact' }">Contact</router-link>
-        </li>
-      </ul>
+          <li class="nav-item">
+            <router-link :to="{ name: 'Resume' }">Resume</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link :to="{ name: 'Contact' }">Contact</router-link>
+          </li>
+        </ul>
+      </nav>
+      <nav v-else class="mobile-menu">
+        <ul class="top-icons">
+          <li class="nav-item power-search">
+            <img src="@/assets/icon/volt.svg" alt="search" />
+          </li>
+          <li class="nav-item hamburger" @click.prevent="toggolExpandedNav">
+            <img src="@/assets/icon/hamburger.svg" alt="menu" />
+          </li>
+        </ul>
+        <div
+          v-if="navExpand"
+          class="expanded-nav"
+          @click.prevent="toggolExpandedNav"
+        >
+          <div class="cross">
+            <img src="@/assets/icon/cross.svg" alt="menu" />
+          </div>
+          <ul>
+            <li class="nav-item">
+              <router-link :to="{ name: 'BlogIndex' }">Blog</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link :to="{ name: 'Work' }">Work</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link :to="{ name: 'Skill' }">Skill</router-link>
+            </li>
+
+            <li class="nav-item">
+              <router-link :to="{ name: 'Resume' }">Resume</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link :to="{ name: 'Contact' }">Contact</router-link>
+            </li>
+          </ul>
+        </div>
+      </nav>
     </div>
   </div>
 </template>
@@ -40,6 +79,12 @@ import { Options, Vue } from "vue-class-component";
 export default class NavBar extends Vue {
   msg!: string;
   mobileNav = false;
+  navExpand = false;
+
+  toggolExpandedNav() {
+    this.navExpand = !this.navExpand;
+    console.log(this.navExpand);
+  }
 
   created() {
     this.handleView();
@@ -56,7 +101,8 @@ export default class NavBar extends Vue {
   font-size: 30px;
 }
 .nav {
-  padding: 10px 5%;
+  padding: 0 5%;
+  height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -64,27 +110,99 @@ export default class NavBar extends Vue {
 }
 .menu {
   float: left;
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+  .nav-item {
+    padding: 5px 5px;
+    font-size: 20px;
   }
-  li {
-    display: inline;
+  .desktop-menu {
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    li {
+      display: inline;
+    }
+
+    a {
+      &.router-link-exact-active {
+        color: #42b983;
+      }
+    }
   }
-  .item {
-    padding: 0 5px;
-  }
-  a {
-    &.router-link-exact-active {
-      color: #42b983;
+  .mobile-menu {
+    ul {
+      list-style-type: none;
+      padding-inline-start: 0;
+      margin-block-start: 0;
+      margin-block-end: 0;
+    }
+    .top-icons {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .expanded-nav {
+      position: fixed;
+      top: 0;
+      right: 0;
+      background-color: white;
+      width: 200px;
+      height: 100%;
+      z-index: 9;
+
+      // &:before {
+      //   background-color: #42b983;
+      //   transform: translateX(-100%);
+      //   transition: opacity 0.3s ease-out;
+      // }
+
+      // &:after {
+      //   background-color: red;
+      //   transform: translateX(100%);
+      //   transition: opacity 0.3s ease-out;
+      // }
+
+      .cross {
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+        height: 60px;
+
+        img {
+          height: auto;
+          width: 50px;
+        }
+      }
+      .nav-item {
+        padding-left: 10px;
+        a {
+          display: block;
+        }
+        &:hover {
+          background-color: rgb(149, 149, 155);
+        }
+      }
     }
   }
 }
 .power-search {
   img {
-    border-radius: 50% solid black;
-    padding: 5px;
+    border-radius: 50%;
+    padding: 7px 10px;
+    background-color: white;
+  }
+}
+.hamburger {
+  cursor: pointer;
+  img {
+    height: auto;
+    width: 35px;
   }
 }
 </style>
