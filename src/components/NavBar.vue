@@ -6,7 +6,7 @@
     <div class="menu">
       <nav v-if="!mobileNav" class="desktop-menu">
         <ul>
-          <li class="nav-item power-search">
+          <li class="nav-item power-search" @click.prevent="toggolShowModal">
             <img src="@/assets/icon/volt.svg" alt="search" />
           </li>
           <li class="nav-item">
@@ -29,17 +29,17 @@
       </nav>
       <nav v-else class="mobile-menu">
         <ul class="top-icons">
-          <li class="nav-item power-search">
+          <li class="nav-item power-search" @click.prevent="toggolShowModal">
             <img src="@/assets/icon/volt.svg" alt="search" />
           </li>
-          <li class="nav-item hamburger" @click.prevent="toggolExpandedNav">
+          <li class="nav-item hamburger" @click.prevent="toggolNavExpand">
             <img src="@/assets/icon/hamburger.svg" alt="menu" />
           </li>
         </ul>
         <div
           v-if="navExpand"
           class="expanded-nav"
-          @click.prevent="toggolExpandedNav"
+          @click.prevent="toggolNavExpand"
         >
           <div class="cross">
             <img src="@/assets/icon/cross.svg" alt="menu" />
@@ -65,13 +65,19 @@
         </div>
       </nav>
     </div>
+    <Modal :value="showModal" />
   </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 
+import Modal from "./Modal.vue";
+
 @Options({
+  components: {
+    Modal,
+  },
   props: {
     msg: String,
   },
@@ -80,9 +86,14 @@ export default class NavBar extends Vue {
   msg!: string;
   mobileNav = false;
   navExpand = false;
+  showModal = true;
 
-  toggolExpandedNav() {
+  toggolNavExpand() {
     this.navExpand = !this.navExpand;
+  }
+  toggolShowModal() {
+    console.log("toggled");
+    this.showModal = !this.showModal;
   }
 
   created() {
@@ -191,6 +202,7 @@ export default class NavBar extends Vue {
   }
 }
 .power-search {
+  cursor: pointer;
   img {
     border-radius: 50%;
     padding: 7px 10px;
