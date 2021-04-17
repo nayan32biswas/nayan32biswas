@@ -65,7 +65,7 @@
         </div>
       </nav>
     </div>
-    <Modal :value="showModal" />
+    <Modal :active="showModal" />
   </div>
 </template>
 
