@@ -83,14 +83,13 @@ export default class NavBar extends Vue {
 
   toggolExpandedNav() {
     this.navExpand = !this.navExpand;
-    console.log(this.navExpand);
   }
 
   created() {
     this.handleView();
   }
   handleView() {
-    this.mobileNav = window.innerWidth <= 768;
+    this.mobileNav = window.innerWidth <= 768 - 768 * 0.2;
     window.addEventListener("resize", this.handleView);
   }
 }
