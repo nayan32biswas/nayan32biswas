@@ -1,6 +1,7 @@
 <template>
   <!-- The Modal -->
   <div v-if="modelValue" class="modal">
+    <div class="inner-layer" @click.prevent="closeModal"></div>
     <!-- Modal content -->
     <div class="modal-content">
       <header class="modal-header">
@@ -36,7 +37,7 @@ export default class Modal extends Vue {
 .modal {
   display: block; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 99; /* Sit on top */
+  z-index: 998; /* Sit on top */
   padding-top: 100px; /* Location of the box */
   left: 0;
   top: 0;
@@ -46,9 +47,21 @@ export default class Modal extends Vue {
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
 }
+.inner-layer {
+  display: block; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 999; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+}
 
 /* Modal Content */
 .modal-content {
+  z-index: 1000;
   position: relative;
   display: flex;
   flex-direction: column;

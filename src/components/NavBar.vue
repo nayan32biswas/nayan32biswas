@@ -67,7 +67,7 @@
     </div>
     <Modal v-model="showModal" @input="showModal = false">
       <template v-slot:header>
-        <h1>Title</h1>
+        <div>Title</div>
       </template>
       <template v-slot:body>
         <div>Body</div>
