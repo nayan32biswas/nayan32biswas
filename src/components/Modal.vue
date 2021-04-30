@@ -1,11 +1,14 @@
 <template>
   <!-- The Modal -->
-  <div v-if="active" class="modal" @click.prevent="closeModal">
+  <div v-if="modelValue" class="modal">
     <!-- Modal content -->
     <div class="modal-content">
-      <span class="close" @click.prevent="closeModal">×</span>
-      <p>Some text in the Modal..</p>
-      <button @click.prevent="closeModal">demo</button>
+      <header class="modal-header">
+        <slot name="header"></slot>
+        <button class="close" @click.prevent="closeModal">x</button>
+      </header>
+      <slot name="body"></slot>
+      <slot name="footer"></slot>
     </div>
   </div>
 </template>
@@ -15,16 +18,15 @@ import { Options, Vue } from "vue-class-component";
 
 @Options({
   props: {
-    active: Boolean,
+    modelValue: Boolean,
   },
+  name: "Modal",
+  emits: ["input"],
 })
 export default class Modal extends Vue {
-  active = false;
-  mounted() {
-    console.log("Modal created");
-  }
+  modelValue = false;
   closeModal() {
-    console.log("close");
+    this.$emit("input", false);
   }
 }
 </script>
@@ -47,19 +49,40 @@ export default class Modal extends Vue {
 
 /* Modal Content */
 .modal-content {
-  background-color: #fefefe;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  pointer-events: auto;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.3rem;
+  outline: 0;
   margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
   width: 80%;
 }
 
-/* The Close Button */
-.close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+.modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1rem 1rem;
+  border-bottom: 1px solid #e7e7e7;
+  border-top-left-radius: calc(0.3rem - 1px);
+  border-top-right-radius: calc(0.3rem - 1px);
+  .close {
+    padding: 1rem 1rem;
+    margin: -1rem -1rem -1rem auto;
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: 0.5;
+    background-color: transparent;
+    border: 0;
+  }
 }
 
 .close:hover,

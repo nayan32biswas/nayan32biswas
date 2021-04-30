@@ -5,7 +5,9 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 
-@Options({})
+@Options({
+  name: "MediaList",
+})
 export default class MediaList extends Vue {}
 </script>
 <style lang="scss" scoped></style>

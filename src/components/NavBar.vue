@@ -65,7 +65,14 @@
         </div>
       </nav>
     </div>
-    <Modal :active="showModal" />
+    <Modal v-model="showModal" @input="showModal = false">
+      <template v-slot:header>
+        <h1>Title</h1>
+      </template>
+      <template v-slot:body>
+        <div>Body</div>
+      </template>
+    </Modal>
   </div>
 </template>
 
@@ -81,6 +88,7 @@ import Modal from "./Modal.vue";
   props: {
     msg: String,
   },
+  name: "NavBar",
 })
 export default class NavBar extends Vue {
   msg!: string;
@@ -92,11 +100,11 @@ export default class NavBar extends Vue {
     this.navExpand = !this.navExpand;
   }
   toggolShowModal() {
-    console.log("toggled");
     this.showModal = !this.showModal;
   }
 
   created() {
+    console.log("created nav");
     this.handleView();
   }
   handleView() {

@@ -36,6 +36,7 @@ import MediaList from "./MediaList.vue";
   components: {
     MediaList,
   },
+  name: "HomeBodyTop",
 })
 export default class HomeBodyTop extends Vue {
   //   fileContent = mdFile;
