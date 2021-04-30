@@ -67,10 +67,7 @@
     </div>
     <Modal v-model="showModal" @input="showModal = false">
       <template v-slot:header>
-        <div>Title</div>
-      </template>
-      <template v-slot:body>
-        <div>Body</div>
+        <div>Implement search</div>
       </template>
     </Modal>
   </div>
