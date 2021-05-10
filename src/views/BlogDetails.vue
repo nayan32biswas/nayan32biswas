@@ -1,24 +1,22 @@
 <template>
   <div class="Blog">
-    <h1>BlogDetails</h1>
-    <!-- <div><VueShowdown :markdown="getContent()"></VueShowdown></div> -->
+    <div>
+      <VueShowdown :markdown="getContent"></VueShowdown>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
-// import VueShowdown from "vue-showdown";
-
-// import mdFile from "../../README.md";
-
 @Component({
-  components: {
-    // VueShowdown,
-  },
+  components: {},
+  name: "BlogDetails",
 })
 export default class BlogDetails extends Vue {
-  //   fileContent = mdFile;
+  get getContent(): string {
+    return require("!!html-loader!markdown-loader!../assets/md_files/docker.md");
+  }
 }
 </script>
 <style lang="sass" scoped></style>
