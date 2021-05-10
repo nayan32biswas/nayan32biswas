@@ -1,6 +1,6 @@
 <template>
   <div class="Blog">
-    <h1>About</h1>
+    <h1>Contact</h1>
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component({})
-export default class About extends Vue {
+export default class Contact extends Vue {
   //   fileContent = mdFile;
 }
 </script>
