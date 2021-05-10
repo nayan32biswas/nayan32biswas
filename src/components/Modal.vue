@@ -22,7 +22,7 @@ import { Component, Vue, Prop } from "vue-property-decorator";
 })
 export default class Modal extends Vue {
   @Prop() modelValue!: boolean;
-  closeModal() {
+  closeModal(): void {
     // TODO: implement emit
     // this.$emit("input", false);
   }

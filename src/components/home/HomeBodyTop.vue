@@ -3,7 +3,7 @@
     <div class="container">
       <div class="body-title">
         <div>
-          HEY! I AM
+          {{ "HEY! I AM" }}
         </div>
         <div class="title">
           <h1>Nayan Biswas</h1>

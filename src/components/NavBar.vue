@@ -90,18 +90,18 @@ export default class NavBar extends Vue {
   navExpand = false;
   showModal = true;
 
-  toggolNavExpand() {
+  toggolNavExpand(): void {
     this.navExpand = !this.navExpand;
   }
-  toggolShowModal() {
+  toggolShowModal(): void {
     this.showModal = !this.showModal;
   }
 
-  created() {
+  created(): void {
     console.log("created nav");
     this.handleView();
   }
-  handleView() {
+  handleView(): void {
     this.mobileNav = window.innerWidth <= 768 - 768 * 0.2;
     window.addEventListener("resize", this.handleView);
   }
@@ -113,7 +113,7 @@ export default class NavBar extends Vue {
   font-size: 30px;
 }
 .nav {
-  padding: 0 5%;
+  padding: 0 5% !important;
   height: 60px;
   display: flex;
   justify-content: space-between;
