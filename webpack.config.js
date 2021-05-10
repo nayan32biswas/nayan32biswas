@@ -1,4 +1,4 @@
-const marked = require("marked");
+const marked = import("marked");
 const markdownRenderer = new marked.Renderer();
 
 // webpack.config.js
