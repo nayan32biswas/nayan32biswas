@@ -21,7 +21,9 @@ const state: PostState = {
     name: "",
     filePath: "",
     isPublished: true,
+    coverImage: "",
     tags: [],
+    relatedPosts: [],
     shortDescription: "",
   },
   error: false,
@@ -35,16 +37,18 @@ const getters: GetterTree<PostState, RootState> = {
 
 const actions: ActionTree<PostState, RootState> = {
   async [FETCH_POSTS]({ commit }, { pageNumber, pageSize }): Promise<Post[]> {
-    // Post[]
     return new Promise((resolve) => {
       const start = (pageNumber - 1) * pageSize;
       const end = pageNumber * pageSize;
-      const posts = POST.filter((post) => post.isPublished);
-      resolve(posts.slice(start, end));
+      const posts = POST.filter((post) => post.isPublished).slice(start, end);
+      resolve(posts);
     });
   },
-  [FETCH_POST]({ commit }, { slug }): Post | undefined {
-    return POST.find((post) => post.slug == slug);
+  async [FETCH_POST]({ commit }, { slug }): Promise<Post | null> {
+    return new Promise((resolve) => {
+      const post = POST.find((post) => post.slug == slug) || null;
+      resolve(post);
+    });
   },
 };
 

@@ -1,10 +1,11 @@
 <template>
   <div class="Blog">
     <h1>Blog Index</h1>
-    <router-link
-      :to="{ name: 'BlogDetails', params: { filename: 'demo-file' } }"
-      >Blog detaiils</router-link
-    >
+    <PostListCard
+      v-for="(post, idx) in posts"
+      :key="'posts' + idx"
+      :post="post"
+    />
   </div>
 </template>
 
@@ -16,14 +17,19 @@ import { Post } from "@/types/common.types";
 import { PostModule } from "@/store/namespace.names";
 import { FETCH_POSTS } from "@/store/action.names";
 
+import PostListCard from "@/components/post/PostListCard.vue";
+
 @Component({
+  components: {
+    PostListCard,
+  },
   name: "BlogIndex",
 })
 export default class BlogIndex extends Vue {
   @PostModule.Action(FETCH_POSTS) fetchPosts!: ActionMethod;
   pageNumber = 1;
   pageSize = 10;
-  posts: Post[] | null = null;
+  posts: Post[] = [];
 
   mounted(): void {
     const payload = {

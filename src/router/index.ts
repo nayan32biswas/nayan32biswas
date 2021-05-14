@@ -15,7 +15,7 @@ const routes: Array<RouteConfig> = [
     component: () => import("../views/BlogIndex.vue"),
   },
   {
-    path: "/blog-index/:filename",
+    path: "/blog-index/:slug",
     name: "BlogDetails",
     component: () => import("../views/BlogDetails.vue"),
   },
