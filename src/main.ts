@@ -1,4 +1,5 @@
 import Vue from "vue";
+import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
@@ -13,6 +14,9 @@ Vue.use(VueShowdown, {
     emoji: false,
   },
 });
+
+Vue.use(BootstrapVue);
+Vue.use(IconsPlugin);
 
 // function checkAuth(to: any, from: any, next: any) {
 //   const loggedIn = store.getters[namespaced(NS_USER, TOKEN)] != null;

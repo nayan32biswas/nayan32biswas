@@ -38,9 +38,7 @@ import MediaList from "./MediaList.vue";
   },
   name: "HomeBodyTop",
 })
-export default class HomeBodyTop extends Vue {
-  //   fileContent = mdFile;
-}
+export default class HomeBodyTop extends Vue {}
 </script>
 <style lang="scss" scoped>
 .top-body {

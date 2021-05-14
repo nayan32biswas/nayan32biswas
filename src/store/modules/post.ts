@@ -11,7 +11,7 @@ import { TOTAL_POST } from "../getter.names";
 import { FETCH_POSTS, FETCH_POST } from "../action.names";
 
 // import {  } from "../mutation.names";
-import { Post, PostDetails } from "../../types/common.types";
+import { Post, PostDetails, PostContent } from "../../types/common.types";
 import POST from "../postData";
 import POST_CONTENT from "../postContent";
 
@@ -38,10 +38,10 @@ const getters: GetterTree<PostState, RootState> = {
 
 const actions: ActionTree<PostState, RootState> = {
   // eslint-disable-next-line
-  async [FETCH_POSTS]({ commit }, { pageNumber, pageSize }): Promise<Post[]> {
+  async [FETCH_POSTS]({ commit }, { page, limit }): Promise<Post[]> {
     return new Promise((resolve) => {
-      const start = (pageNumber - 1) * pageSize;
-      const end = pageNumber * pageSize;
+      const start = (page - 1) * limit;
+      const end = page * limit;
       const posts = POST.filter((post) => post.isPublished).slice(start, end);
       resolve(posts);
     });
@@ -75,3 +75,26 @@ const postDataStore: Module<PostState, RootState> = {
 };
 
 export default postDataStore;
+
+(function () {
+  const postListSlugs = new Set(POST.map((post: Post) => post.slug));
+  const postContentSlugs = new Set(
+    POST_CONTENT.map((post: PostContent) => post.slug)
+  );
+  // eslint-disable-next-line
+  function symmetricDifference(setA: any, setB: any) {
+    const _difference = new Set(setA);
+    for (const elem of setB) {
+      if (_difference.has(elem)) {
+        _difference.delete(elem);
+      } else {
+        _difference.add(elem);
+      }
+    }
+    return _difference;
+  }
+  const differ = symmetricDifference(postListSlugs, postContentSlugs);
+  if (differ.size) {
+    throw `List not match. "${[...differ].join(", ")}"`;
+  }
+})();

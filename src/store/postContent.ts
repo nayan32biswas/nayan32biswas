@@ -36,8 +36,8 @@ const POST_CONTENT = [
     content: require("!!html-loader!markdown-loader!@/assets/posts/flutter.md"),
   },
   {
-    slug: "GCP",
-    content: require("!!html-loader!markdown-loader!@/assets/posts/GCP.md"),
+    slug: "gcp",
+    content: require("!!html-loader!markdown-loader!@/assets/posts/gcp.md"),
   },
   {
     slug: "gitlab-ci-cd",

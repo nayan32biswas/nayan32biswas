@@ -16,3 +16,8 @@ export interface PostContent {
 export interface PostDetails extends Post {
   content: string | null;
 }
+
+export interface pageFilter {
+  page: number;
+  limit: number;
+}

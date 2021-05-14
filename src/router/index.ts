@@ -10,12 +10,12 @@ const routes: Array<RouteConfig> = [
     component: () => import("../views/Home.vue"),
   },
   {
-    path: "/blog-index",
-    name: "BlogIndex",
+    path: "/blog",
+    name: "blog-index",
     component: () => import("../views/BlogIndex.vue"),
   },
   {
-    path: "/blog-index/:slug",
+    path: "/blog/:slug",
     name: "BlogDetails",
     component: () => import("../views/BlogDetails.vue"),
   },

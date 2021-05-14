@@ -81,13 +81,13 @@ const POST = [
     shortDescription: "flutter",
   },
   {
-    slug: "GCP",
-    name: "GCP",
+    slug: "gcp",
+    name: "gcp",
     isPublished: true,
     // coverImage: "",
-    tags: ["GCP"],
+    tags: ["gcp"],
     relatedPosts: [""],
-    shortDescription: "GCP",
+    shortDescription: "gcp",
   },
   {
     slug: "gitlab-ci-cd",
@@ -178,15 +178,6 @@ const POST = [
     tags: ["mongo"],
     relatedPosts: [""],
     shortDescription: "mongo",
-  },
-  {
-    slug: ".my_bash",
-    name: ".my_bash",
-    isPublished: true,
-    // coverImage: "",
-    tags: [".my_bash"],
-    relatedPosts: [""],
-    shortDescription: ".my_bash",
   },
   {
     slug: "mysql",

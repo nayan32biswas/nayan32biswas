@@ -10,7 +10,7 @@
             <img src="@/assets/icon/volt.svg" alt="search" />
           </li>
           <li class="nav-item">
-            <router-link :to="{ name: 'BlogIndex' }">Blog</router-link>
+            <router-link :to="{ name: 'blog-index' }">Blog</router-link>
           </li>
           <li class="nav-item">
             <router-link :to="{ name: 'Work' }">Work</router-link>
@@ -46,7 +46,7 @@
           </div>
           <ul>
             <li class="nav-item">
-              <router-link :to="{ name: 'BlogIndex' }">Blog</router-link>
+              <router-link :to="{ name: 'blog-index' }">Blog</router-link>
             </li>
             <li class="nav-item">
               <router-link :to="{ name: 'Work' }">Work</router-link>
@@ -98,7 +98,6 @@ export default class NavBar extends Vue {
   }
 
   created(): void {
-    console.log("created nav");
     this.handleView();
   }
   handleView(): void {
