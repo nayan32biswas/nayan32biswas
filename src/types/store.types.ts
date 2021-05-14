@@ -1,4 +1,4 @@
-import { Post } from "./common.types";
+import { Post, PostDetails } from "./common.types";
 
 export interface RootState {
   projectName: string;
@@ -6,6 +6,6 @@ export interface RootState {
 
 export interface PostState {
   postList: Post[];
-  postDetails: Post;
+  postDetails: PostDetails;
   error: boolean;
 }

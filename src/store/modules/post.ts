@@ -11,20 +11,21 @@ import { TOTAL_POST } from "../getter.names";
 import { FETCH_POSTS, FETCH_POST } from "../action.names";
 
 // import {  } from "../mutation.names";
-import { Post } from "../../types/common.types";
+import { Post, PostDetails } from "../../types/common.types";
 import POST from "../postData";
+import POST_CONTENT from "../postContent";
 
 const state: PostState = {
   postList: [],
   postDetails: {
     slug: "",
     name: "",
-    filePath: "",
     isPublished: true,
     coverImage: "",
     tags: [],
     relatedPosts: [],
     shortDescription: "",
+    content: "",
   },
   error: false,
 };
@@ -46,10 +47,19 @@ const actions: ActionTree<PostState, RootState> = {
     });
   },
   // eslint-disable-next-line
-  async [FETCH_POST]({ commit }, { slug }): Promise<Post | null> {
+  async [FETCH_POST]({ commit }, { slug }): Promise<PostDetails | null> {
     return new Promise((resolve) => {
       const post = POST.find((post) => post.slug == slug) || null;
-      resolve(post);
+      if (post) {
+        const content = POST_CONTENT.find((post) => post.slug == slug) || {
+          content: "",
+        };
+        resolve({
+          ...post,
+          content: content.content,
+        });
+      }
+      resolve(null);
     });
   },
 };
