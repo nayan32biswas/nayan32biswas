@@ -15,7 +15,7 @@ import { Component, Vue } from "vue-property-decorator";
 })
 export default class BlogDetails extends Vue {
   get getContent(): string {
-    return require("!!html-loader!markdown-loader!../assets/md_files/docker.md");
+    return require("!!html-loader!markdown-loader!@/assets/md_files/docker.md");
   }
 }
 </script>

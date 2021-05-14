@@ -1,5 +1,5 @@
 <template>
-  <div class="nav">
+  <div class="custom-nav">
     <div class="logo">
       <router-link :to="{ name: 'Home' }">Nayan.</router-link>
     </div>
@@ -112,8 +112,8 @@ export default class NavBar extends Vue {
 .logo {
   font-size: 30px;
 }
-.nav {
-  padding: 0 5% !important;
+.custom-nav {
+  padding: 0 5%;
   height: 60px;
   display: flex;
   justify-content: space-between;

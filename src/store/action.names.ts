@@ -1,1 +1,2 @@
-export const FETCH_POST_LIST = "fetchPostList";
+export const FETCH_POSTS = "fetchPosts";
+export const FETCH_POST = "fetchPost";

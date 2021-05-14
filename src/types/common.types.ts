@@ -2,7 +2,7 @@ export interface Post {
   slug: string;
   name: string;
   filePath: string;
-  isPublish: boolean;
+  isPublished: boolean;
   tags: string[];
   shortDescription: string;
 }
