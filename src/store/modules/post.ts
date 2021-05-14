@@ -36,6 +36,7 @@ const getters: GetterTree<PostState, RootState> = {
 };
 
 const actions: ActionTree<PostState, RootState> = {
+  // eslint-disable-next-line
   async [FETCH_POSTS]({ commit }, { pageNumber, pageSize }): Promise<Post[]> {
     return new Promise((resolve) => {
       const start = (pageNumber - 1) * pageSize;
@@ -44,6 +45,7 @@ const actions: ActionTree<PostState, RootState> = {
       resolve(posts);
     });
   },
+  // eslint-disable-next-line
   async [FETCH_POST]({ commit }, { slug }): Promise<Post | null> {
     return new Promise((resolve) => {
       const post = POST.find((post) => post.slug == slug) || null;
