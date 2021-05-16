@@ -21,3 +21,14 @@ export interface pageFilter {
   page: number;
   limit: number;
 }
+
+export interface Link {
+  name: string;
+  query?: { [key: string]: string };
+  params?: { [key: string]: string };
+}
+
+export interface Search {
+  name: string;
+  link: string | Link;
+}

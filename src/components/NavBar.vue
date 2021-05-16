@@ -65,30 +65,24 @@
         </div>
       </nav>
     </div>
-    <Modal v-model="showModal" @input="showModal = false">
-      <template v-slot:header>
-        <div>Implement search</div>
-      </template>
-    </Modal>
+    <Search v-if="showModal" @modalClose="showModal = false" />
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator";
-
-import Modal from "./Modal.vue";
+import { Component, Vue } from "vue-property-decorator";
+import Search from "./Search.vue";
 
 @Component({
   components: {
-    Modal,
+    Search,
   },
   name: "NavBar",
 })
 export default class NavBar extends Vue {
-  @Prop() msg!: string;
   mobileNav = false;
   navExpand = false;
-  showModal = true;
+  showModal = false;
 
   toggolNavExpand(): void {
     this.navExpand = !this.navExpand;
