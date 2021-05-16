@@ -16,10 +16,10 @@
 </template>
 
 <script lang="ts">
+import { Component, Vue, Watch } from "vue-property-decorator";
+import { ActionMethod } from "vuex";
 import { FETCH_POST } from "@/store/action.names";
 import { PostDetails } from "@/types/common.types";
-import { Component, Vue } from "vue-property-decorator";
-import { ActionMethod } from "vuex";
 import { PostModule } from "../store/namespace.names";
 
 @Component({
@@ -29,12 +29,18 @@ import { PostModule } from "../store/namespace.names";
 export default class BlogDetails extends Vue {
   @PostModule.Action(FETCH_POST) fetchPost!: ActionMethod;
   post: PostDetails | null = null;
-
-  mounted(): void {
+  fetchContent() {
     const slug = this.$route.params.slug;
     this.fetchPost({ slug }).then((post: PostDetails) => {
       this.post = post;
     });
+  }
+  @Watch("$route", { deep: true })
+  handleRouteChange() {
+    this.fetchContent();
+  }
+  mounted(): void {
+    this.fetchContent();
   }
 }
 </script>

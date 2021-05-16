@@ -6,7 +6,11 @@
     <div class="menu">
       <nav v-if="!mobileNav" class="desktop-menu">
         <ul>
-          <li class="nav-item power-search" @click.prevent="toggolShowModal">
+          <li
+            title="CRTL + SHIFT + F"
+            class="nav-item power-search"
+            @click.prevent="toggolShowModal"
+          >
             <img src="@/assets/icon/volt.svg" alt="search" />
           </li>
           <li class="nav-item">

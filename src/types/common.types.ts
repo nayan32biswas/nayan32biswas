@@ -31,4 +31,5 @@ export interface Link {
 export interface Search {
   name: string;
   link: string | Link;
+  priority?: number;
 }

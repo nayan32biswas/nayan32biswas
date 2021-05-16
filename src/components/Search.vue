@@ -1,25 +1,20 @@
 <template>
-  <b-modal
-    hide-header
-    hide-footer
-    centerd
-    v-model="showModal"
-    no-close-on-backdrop
-  >
+  <b-modal hide-header hide-footer centerd v-model="showModal">
     <template>
       <b-form @submit.prevent="submitSearch()">
         <div class="search">
           <b-form-input
-            v-model="search"
+            v-model="input"
             type="search"
             name="Search"
             debounce="300"
             v-on:keyup.38="changeSelected(-1)"
             v-on:keyup.40="changeSelected(1)"
-            placeholder="Type '0' to see top level options"
+            placeholder="Search..."
           />
           <!-- v-on:keyup.38=="upArrow" and v-on:keyup.40=="downArrow" -->
         </div>
+        <span class="search-message">CRTL + SHIFT + F</span>
         <div class="results">
           <li
             class="result-item"
@@ -40,13 +35,16 @@
 import { Component, Watch, Vue } from "vue-property-decorator";
 
 import { Search as SearchType } from "@/types/common.types";
+import search from "../store/search";
 
 @Component({})
 export default class Search extends Vue {
   showModal = true;
-  search = "";
+  input = "";
   selectedResult = 0;
-  results: Array<SearchType> = [
+  results: Array<SearchType> = [];
+
+  pages: Array<SearchType> = [
     {
       name: "Blog Page",
       link: "/blog",
@@ -64,6 +62,7 @@ export default class Search extends Vue {
       },
     },
   ];
+
   changeSelected(change: number): void {
     if (!change) {
       this.selectedResult = 0;
@@ -81,10 +80,14 @@ export default class Search extends Vue {
     this.$emit("modalClose");
   }
 
-  @Watch("search")
+  @Watch("input")
   handleSearch(): void {
+    if (this.input.length < 2) {
+      this.results = [];
+      return;
+    }
     this.changeSelected(0);
-    console.log("handleSearch: ", this.search);
+    this.results = search(this.input);
   }
 
   submitSearch(idx: number | null = null): void {
@@ -123,6 +126,15 @@ export default class Search extends Vue {
           margin: 8px 15px;
         }
       }
+    }
+    .search-message {
+      color: #fcfcfc;
+      margin: 3px 5px 0 0;
+      font-size: 10px;
+      font-weight: 200;
+      top: 0;
+      right: 0;
+      position: absolute;
     }
     .selected-result {
       background-color: #2b4048;
