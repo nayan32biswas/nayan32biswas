@@ -9,20 +9,24 @@
     <template>
       <b-form @submit.prevent="submitSearch()">
         <div class="search">
-          <input
+          <b-form-input
             v-model="search"
             type="search"
-            name="search"
-            v-on:keyup.38="upArrowPress()"
-            v-on:keyup.40="downArrowPress()"
-            placeholder="Type '?' to see top level options"
+            name="Search"
+            debounce="300"
+            v-on:keyup.38="changeSelected(-1)"
+            v-on:keyup.40="changeSelected(1)"
+            placeholder="Type '0' to see top level options"
           />
+          <!-- v-on:keyup.38=="upArrow" and v-on:keyup.40=="downArrow" -->
         </div>
         <div class="results">
           <li
             class="result-item"
             v-for="(result, idx) in results"
             :key="'search-results' + idx"
+            @click.prevent="submitSearch(idx)"
+            :class="{ 'selected-result': selectedResult === idx }"
           >
             <span class="result-name">{{ result.name }}</span>
           </li>
@@ -41,6 +45,7 @@ import { Search as SearchType } from "@/types/common.types";
 export default class Search extends Vue {
   showModal = true;
   search = "";
+  selectedResult = 0;
   results: Array<SearchType> = [
     {
       name: "Blog Page",
@@ -52,12 +57,24 @@ export default class Search extends Vue {
         name: "skill",
       },
     },
+    {
+      name: "Contact Page",
+      link: {
+        name: "contact",
+      },
+    },
   ];
-  upArrowPress(): void {
-    console.log("up press");
-  }
-  downArrowPress(): void {
-    console.log("down press");
+  changeSelected(change: number): void {
+    if (!change) {
+      this.selectedResult = 0;
+      return;
+    }
+    this.selectedResult += change;
+    if (this.selectedResult < 0) {
+      this.selectedResult = this.results.length - 1;
+      return;
+    }
+    this.selectedResult = this.selectedResult % this.results.length;
   }
   @Watch("showModal")
   handleModalClose(): void {
@@ -66,19 +83,18 @@ export default class Search extends Vue {
 
   @Watch("search")
   handleSearch(): void {
+    this.changeSelected(0);
     console.log("handleSearch: ", this.search);
   }
 
-  submitSearch(result: SearchType | null = null): void {
-    console.log("submitSearch: ", result);
-    if (!result) {
-      if (this.results.length) {
-        result = this.results[0];
-      }
+  submitSearch(idx: number | null = null): void {
+    const pos = idx || this.selectedResult;
+    if (this.results.length < pos) {
+      return;
     }
-    if (result) {
-      console.log("search able");
-    }
+    const result = this.results[pos];
+    this.$emit("modalClose");
+    this.$router.push(result.link);
   }
 }
 </script>
@@ -102,11 +118,14 @@ export default class Search extends Vue {
         display: flex;
         cursor: pointer;
 
-        border-bottom: 1px solid #2a3e44;
+        border-bottom: 2px solid #2a3e44;
         .result-name {
           margin: 8px 15px;
         }
       }
+    }
+    .selected-result {
+      background-color: #2b4048;
     }
   }
 }

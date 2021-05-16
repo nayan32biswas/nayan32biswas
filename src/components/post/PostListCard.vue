@@ -4,7 +4,7 @@
       <div class="col-md-4">
         <router-link
           class="cover-image"
-          :to="{ name: 'BlogDetails', params: { slug: post.slug } }"
+          :to="{ name: 'blog-details', params: { slug: post.slug } }"
         >
           <img v-if="post.coverImage" :src="post.coverImage" alt="" />
           <img
@@ -15,7 +15,7 @@
         </router-link>
       </div>
       <div class="col-md-8">
-        <router-link :to="{ name: 'BlogDetails', params: { slug: post.slug } }"
+        <router-link :to="{ name: 'blog-details', params: { slug: post.slug } }"
           ><h4 class="card-title">{{ post.name }}</h4></router-link
         >
         <p class="card-text">{{ post.shortDescription }}</p>

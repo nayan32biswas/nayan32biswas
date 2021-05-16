@@ -1,7 +1,7 @@
 <template>
   <div class="custom-nav">
     <div class="logo">
-      <router-link :to="{ name: 'Home' }">Nayan.</router-link>
+      <router-link :to="{ name: 'home' }">Nayan.</router-link>
     </div>
     <div class="menu">
       <nav v-if="!mobileNav" class="desktop-menu">
@@ -13,17 +13,17 @@
             <router-link :to="{ name: 'blog-index' }">Blog</router-link>
           </li>
           <li class="nav-item">
-            <router-link :to="{ name: 'Work' }">Work</router-link>
+            <router-link :to="{ name: 'work' }">Work</router-link>
           </li>
           <li class="nav-item">
-            <router-link :to="{ name: 'Skill' }">Skill</router-link>
+            <router-link :to="{ name: 'skill' }">Skill</router-link>
           </li>
 
           <li class="nav-item">
-            <router-link :to="{ name: 'Resume' }">Resume</router-link>
+            <router-link :to="{ name: 'resume' }">Resume</router-link>
           </li>
           <li class="nav-item">
-            <router-link :to="{ name: 'Contact' }">Contact</router-link>
+            <router-link :to="{ name: 'contact' }">Contact</router-link>
           </li>
         </ul>
       </nav>
@@ -49,17 +49,17 @@
               <router-link :to="{ name: 'blog-index' }">Blog</router-link>
             </li>
             <li class="nav-item">
-              <router-link :to="{ name: 'Work' }">Work</router-link>
+              <router-link :to="{ name: 'work' }">Work</router-link>
             </li>
             <li class="nav-item">
-              <router-link :to="{ name: 'Skill' }">Skill</router-link>
+              <router-link :to="{ name: 'skill' }">Skill</router-link>
             </li>
 
             <li class="nav-item">
-              <router-link :to="{ name: 'Resume' }">Resume</router-link>
+              <router-link :to="{ name: 'resume' }">Resume</router-link>
             </li>
             <li class="nav-item">
-              <router-link :to="{ name: 'Contact' }">Contact</router-link>
+              <router-link :to="{ name: 'contact' }">Contact</router-link>
             </li>
           </ul>
         </div>
@@ -92,6 +92,11 @@ export default class NavBar extends Vue {
   }
 
   created(): void {
+    window.addEventListener("keydown", (e) => {
+      if (e.ctrlKey && e.shiftKey && e.code == "KeyF") {
+        this.showModal = !this.showModal;
+      }
+    });
     this.handleView();
   }
   handleView(): void {
