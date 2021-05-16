@@ -1,19 +1,25 @@
 <template>
   <div class="Blog">
-    <h1>Blog Index</h1>
-    <PostListCard
-      v-for="(post, idx) in posts"
-      :key="'posts' + idx"
-      :post="post"
-    />
-    <b-pagination
-      first-number
-      last-number
-      v-model="filter.page"
-      :per-page="filter.limit"
-      :total-rows="totalPost"
-      @change="handlePageChange"
-    ></b-pagination>
+    <div class="container">
+      <h1>Blog Index</h1>
+      <div class="custom-card">
+        <PostListCard
+          v-for="(post, idx) in posts"
+          :key="'posts' + idx"
+          :post="post"
+        />
+        <div class="pagination">
+          <b-pagination
+            first-number
+            last-number
+            v-model="filter.page"
+            :per-page="filter.limit"
+            :total-rows="totalPost"
+            @change="handlePageChange"
+          ></b-pagination>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -84,4 +90,14 @@ export default class BlogIndex extends Vue {
   }
 }
 </script>
-<style lang="sass" scoped></style>
+
+<style lang="scss" scoped>
+.custom-card {
+  max-width: 800px;
+  margin: auto;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+</style>

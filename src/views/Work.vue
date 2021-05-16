@@ -12,4 +12,4 @@ export default class Work extends Vue {
   //   fileContent = mdFile;
 }
 </script>
-<style lang="sass" scoped></style>
+<style lang="scss" scoped></style>

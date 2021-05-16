@@ -14,4 +14,4 @@ import HomeBodyTop from "../components/home/HomeBodyTop.vue";
 })
 export default class Home extends Vue {}
 </script>
-<style lang="sass" scoped></style>
+<style lang="scss" scoped></style>

@@ -32,4 +32,4 @@ export default class Resume extends Vue {
   // resume = "https://pdftron.s3.amazonaws.com/downloads/pl/webviewer-demo.pdf";
 }
 </script>
-<style lang="sass" scoped></style>
+<style lang="scss" scoped></style>
