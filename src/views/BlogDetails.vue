@@ -29,14 +29,14 @@ import { PostModule } from "../store/namespace.names";
 export default class BlogDetails extends Vue {
   @PostModule.Action(FETCH_POST) fetchPost!: ActionMethod;
   post: PostDetails | null = null;
-  fetchContent() {
+  fetchContent(): void {
     const slug = this.$route.params.slug;
     this.fetchPost({ slug }).then((post: PostDetails) => {
       this.post = post;
     });
   }
   @Watch("$route", { deep: true })
-  handleRouteChange() {
+  handleRouteChange(): void {
     this.fetchContent();
   }
   mounted(): void {
