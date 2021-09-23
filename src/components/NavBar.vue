@@ -14,20 +14,29 @@
             <img src="@/assets/icon/volt.svg" alt="search" />
           </li>
           <li class="nav-item">
-            <router-link :to="{ name: 'blog-index' }">Blog</router-link>
+            <!-- <router-link :to="{ name: 'blog-index' }">Blog</router-link> -->
+            <router-link :to="{ name: 'home', query: { route: 'blog-index' } }"
+              >Blog</router-link
+            >
           </li>
           <li class="nav-item">
-            <router-link :to="{ name: 'work' }">Work</router-link>
+            <!-- <router-link :to="{ name: 'work' }">Work</router-link> -->
+            <router-link :to="{ name: 'home', query: { route: 'work' } }"
+              >Work</router-link
+            >
           </li>
           <li class="nav-item">
-            <router-link :to="{ name: 'skill' }">Skill</router-link>
+            <!-- <router-link :to="{ name: 'skill' }">Skill</router-link> -->
+            <router-link :to="{ name: 'home', query: { route: 'skill' } }"
+              >Skill</router-link
+            >
           </li>
 
           <li class="nav-item">
-            <router-link :to="{ name: 'resume' }">Resume</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link :to="{ name: 'contact' }">Contact</router-link>
+            <!-- <router-link :to="{ name: 'resume' }">Resume</router-link> -->
+            <router-link :to="{ name: 'home', query: { route: 'resume' } }"
+              >Resume</router-link
+            >
           </li>
         </ul>
       </nav>
@@ -50,20 +59,30 @@
           </div>
           <ul>
             <li class="nav-item">
-              <router-link :to="{ name: 'blog-index' }">Blog</router-link>
+              <!-- <router-link :to="{ name: 'blog-index' }">Blog</router-link> -->
+              <router-link
+                :to="{ name: 'home', query: { route: 'blog-index' } }"
+                >Blog</router-link
+              >
             </li>
             <li class="nav-item">
-              <router-link :to="{ name: 'work' }">Work</router-link>
+              <!-- <router-link :to="{ name: 'work' }">Work</router-link> -->
+              <router-link :to="{ name: 'home', query: { route: 'work' } }"
+                >Work</router-link
+              >
             </li>
             <li class="nav-item">
-              <router-link :to="{ name: 'skill' }">Skill</router-link>
+              <!-- <router-link :to="{ name: 'skill' }">Skill</router-link> -->
+              <router-link :to="{ name: 'home', query: { route: 'skill' } }"
+                >Skill</router-link
+              >
             </li>
 
             <li class="nav-item">
-              <router-link :to="{ name: 'resume' }">Resume</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link :to="{ name: 'contact' }">Contact</router-link>
+              <!-- <router-link :to="{ name: 'resume' }">Resume</router-link> -->
+              <router-link :to="{ name: 'home', query: { route: 'resume' } }"
+                >Resume</router-link
+              >
             </li>
           </ul>
         </div>

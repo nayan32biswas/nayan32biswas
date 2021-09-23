@@ -9,8 +9,8 @@ function searchPost(query: string): Array<SearchType> {
       return {
         name: post.name,
         link: {
-          name: "blog-details",
-          params: { slug: post.slug },
+          name: "home",
+          query: { route: "blog-details", slug: post.slug },
         },
         priority: 7,
       };
@@ -19,8 +19,8 @@ function searchPost(query: string): Array<SearchType> {
       return {
         name: post.name,
         link: {
-          name: "blog-details",
-          params: { slug: post.slug },
+          name: "home",
+          query: { route: "blog-details", slug: post.slug },
         },
         priority: 3,
       };

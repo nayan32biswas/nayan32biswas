@@ -53,8 +53,9 @@ export default class BlogIndex extends Vue {
 
   handlePageChange(pageNumber: number): void {
     this.$router.push({
-      name: "blog-index",
+      name: "home",
       query: {
+        route: "blog-index",
         page: pageNumber.toString(),
         limit: this.filter.limit.toString(),
       },

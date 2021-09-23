@@ -1,5 +1,5 @@
 <template>
-  <div v-if="post" class="container">
+  <div v-if="post" class="container pb-5">
     <div class="text-center">
       <img
         v-if="post.coverImage"
@@ -30,7 +30,7 @@ export default class BlogDetails extends Vue {
   @PostModule.Action(FETCH_POST) fetchPost!: ActionMethod;
   post: PostDetails | null = null;
   fetchContent(): void {
-    const slug = this.$route.params.slug;
+    const slug = this.$route.query.slug;
     this.fetchPost({ slug }).then((post: PostDetails) => {
       this.post = post;
     });
@@ -50,13 +50,27 @@ export default class BlogDetails extends Vue {
   width: 80%;
 }
 .detail-description {
-  width: 70%;
+  width: 80%;
   margin: auto;
   max-width: 800px;
+
+  background-color: #ededed;
+  padding: 10px;
+  border-radius: 5px;
+
+  @media (max-width: 1199.98px) {
+    width: 85%;
+  }
+
   @media (max-width: 991.98px) {
     width: 90%;
   }
   @media (max-width: 767.98px) {
+    width: 100%;
+  }
+}
+.container {
+  @media (max-width: 479.98px) {
     width: 100%;
   }
 }

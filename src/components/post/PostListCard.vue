@@ -15,7 +15,14 @@
         </router-link>
       </div>
       <div class="col-md-8">
-        <router-link :to="{ name: 'blog-details', params: { slug: post.slug } }"
+        <!-- <router-link :to="{ name: 'blog-details', params: { slug: post.slug } }"
+          ><h4 class="card-title">{{ post.name }}</h4></router-link
+        > -->
+        <router-link
+          :to="{
+            name: 'home',
+            query: { route: 'blog-details', slug: post.slug },
+          }"
           ><h4 class="card-title">{{ post.name }}</h4></router-link
         >
         <p class="card-text">{{ post.shortDescription }}</p>
