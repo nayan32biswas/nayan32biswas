@@ -154,10 +154,9 @@ git reset or git reset <file>
 - `git ls-files | xargs wc -l` count number of line **(loc)** in a project.
 - `git log` To see comited.
 
-## Remove cache file
+## Commands
 
 - `git rm --cached <expression>` Remove local cache. It's help gitignore to ignore some thing.
-
-## Add submobule
-
-- `git submodule add <url> <sub_module_folder>`
+- `git submodule add <url> <sub_module_folder>` Add submobule
+- `git add -p <file>` Pertial commit of a file. Select topic by n/y in a file.
+- 
