@@ -10,7 +10,7 @@ bool isPrime(int num) {
 }
 
 List<int> storePrime(int N) {
-  var primeList = List<int>();
+  var primeList = List.filled(0, 0);
   for (int i = 0; i < N; i++) {
     if (isPrime(i)) {
       primeList.add(i);

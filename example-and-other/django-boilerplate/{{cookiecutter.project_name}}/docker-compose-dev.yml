@@ -1,0 +1,65 @@
+version: "3.7"
+
+# RUN ```./production.sh``` for frontend to production
+
+# environment
+x-volumes: &server-volume
+  EMAIL_HOST_USER: ${EMAIL_HOST_USER}
+  EMAIL_HOST_PASSWORD: ${EMAIL_HOST_PASSWORD}
+  SECRET_KEY: ${SECRET_KEY}
+  JWT_ALGORITHM: "HS256"
+  HOST_URL: "http://localhost"
+  DJANGO_SETTINGS_MODULE: "{{cookiecutter.project_name}}.settings.prod"
+
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: ./Dockerfile
+    container_name: {{cookiecutter.project_name}}_server_prod
+    image: registry.gitlab.com/nayan32biswas/Cannot rename project because it contains container registry tags!:${GIT_BRANCH:-latest}
+    command: gunicorn --workers 2 --backlog 2048 --threads 1 shareaes.wsgi:application --bind unix:staticfiles/shareaes.sock
+    # command: gunicorn --workers 2 --backlog 2048 --threads 1 shareaes.wsgi:application --bind 0.0.0.0:8001
+    # ports:
+    #   - "8001:8001"
+    environment:
+      <<: *server-volume
+    volumes:
+      - ./server/staticfiles:/app/server/staticfiles
+    depends_on:
+      - db
+
+  db:
+    image: postgres:12
+    volumes:
+      - {{cookiecutter.project_name}}:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+
+  # celery:
+  #   build:
+  #     context: ./server
+  #     dockerfile: ./Dockerfile
+  #     args:
+  #       PACKAGE_TYPE: --no-dev
+  #   container_name: {{cookiecutter.project_name}}_celery_prod
+  #   command: celery -A {{cookiecutter.project_name}} worker -l info
+  #   environment:
+  #     <<: *server-volume
+  #   env_file: ./config/.env
+  #   volumes:
+  #     - ./server/staticfiles:/app/server/staticfiles
+  #   depends_on:
+  #     - db
+  #     - redis
+  #   links:
+  #     - redis
+  # redis:
+  #   image: redis
+  #   container_name: {{cookiecutter.project_name}}_redis_prod
+  #   restart: always
+  #   ports:
+  #     - "6379:6379"
+
+volumes:
+  {{cookiecutter.project_name}}:

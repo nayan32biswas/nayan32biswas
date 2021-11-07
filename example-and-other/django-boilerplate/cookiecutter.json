@@ -1,0 +1,7 @@
+{
+  "project_name": "new_project",
+  "repo_name": "{{ cookiecutter.project_name|lower|replace(' ', '-') }}",
+  "namespace": "nayan32biswas",
+  "django_rest_framework": "yes",
+  "add_account": "yes"
+}

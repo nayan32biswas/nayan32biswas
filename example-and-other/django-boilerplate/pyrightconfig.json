@@ -1,0 +1,54 @@
+{
+  "include": [
+    "server"
+  ],
+  
+  "exclude": [
+    "**/node_modules",
+    "**/__pycache__",
+    "src/experimental",
+    "src/typestubs"
+  ],
+
+  "ignore": [
+    "src/oldstuff"
+  ],
+
+  "stubPath": "src/stubs",
+  "venvPath": "/usr/local/bin/python",
+
+  "reportMissingImports": true,
+  "reportMissingTypeStubs": false,
+
+  "pythonVersion": "3.8",
+  "pythonPlatform": "Linux",
+
+  "executionEnvironments": [
+    {
+      "root": "src/web",
+      "pythonVersion": "3.5",
+      "pythonPlatform": "Windows",
+      "extraPaths": [
+        "src/service_libs"
+      ]
+    },
+    {
+      "root": "src/sdk",
+      "pythonVersion": "3.0",
+      "extraPaths": [
+        "src/backend"
+      ],
+      "venv": "venv_bar"
+    },
+    {
+      "root": "src/tests",
+      "extraPaths": [
+        "src/tests/e2e",
+        "src/sdk"
+      ]
+    },
+    {
+      "root": "server"
+    }
+  ]
+}

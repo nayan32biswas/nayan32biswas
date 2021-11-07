@@ -1,0 +1,68 @@
+image: docker:latest
+services:
+  - docker:dind
+
+variables:
+  DOCKER_HOST: tcp://docker:2375
+  DOCKER_DRIVER: overlay2
+  CONTAINER_BRANCH_IMAGE: $CI_REGISTRY_IMAGE:$CI_BUILD_REF_SLUG
+  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
+
+stages:
+  - build
+  - test
+  - deploy
+
+test:
+  stage: test
+  image: docker/compose
+  script:
+    - docker-compose -f docker-compose-prod-test.yml build
+    - echo "coverage run manage.py test --noinput && coverage report -m --skip-covered" | docker-compose -f docker-compose-prod-test.yml run --rm server bash
+  only:
+    refs:
+      - master
+    variables:
+      - $CI_COMMIT_MESSAGE =~ / test/
+
+deploy-build:
+  stage: build
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker build -t $CONTAINER_BRANCH_IMAGE -f ./app/Dockerfile.prod ./app
+    - docker push $CONTAINER_BRANCH_IMAGE
+  only:
+    refs:
+      - master
+    variables:
+      - $CI_COMMIT_MESSAGE =~ / deploy/
+
+deploy-test:
+  stage: test
+  image: docker/compose
+  script:
+    - docker-compose -f docker-compose-prod-test.yml build
+    - echo "coverage run manage.py test --noinput && coverage report -m --skip-covered" | docker-compose -f docker-compose-prod-test.yml run --rm server bash
+  only:
+    refs:
+      - master
+    variables:
+      - $CI_COMMIT_MESSAGE =~ / deploy/
+
+deploy-server:
+  stage: deploy
+  before_script:
+    - mkdir -p ~/.ssh
+    - echo "$KHABAMAIR" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - eval "$(ssh-agent -s)"
+    - ssh-add ~/.ssh/id_rsa
+    - ssh-keyscan -H $ADDRESS >> ~/.ssh/known_hosts
+
+  script:
+    - ssh nayan32biswas@$ADDRESS "export COMPOSE_INTERACTIVE_NO_CLI=1 && cd ~/devspreneur/ && git pull origin master && chmod +x ./config/deploy.sh && ./config/deploy.sh && export COMPOSE_INTERACTIVE_NO_CLI=0"
+  only:
+    refs:
+      - master
+    variables:
+      - $CI_COMMIT_MESSAGE =~ / deploy/

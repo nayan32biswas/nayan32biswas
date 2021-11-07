@@ -1,0 +1,86 @@
+version: "3.7"
+
+# environment
+x-volumes: &server-volume
+  JWT_ALGORITHM: "HS256"
+  HOST_URL: "http://localhost:8000"
+
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: ./Dockerfile
+      args:
+        PACKAGE_TYPE: -dev
+    container_name: {{cookiecutter.project_name}}_server
+    image: nayan32biswas/{{cookiecutter.project_name}}:${GIT_BRANCH:-latest}
+    command: python manage.py runserver 0.0.0.0:8000
+    expose:
+      - 8000
+    ports:
+      - "8000:8000"
+    environment:
+      <<: *server-volume
+    env_file: ./config/.env
+    volumes:
+      - ./server/:/app/server/
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13
+    volumes:
+      - {{cookiecutter.project_name}}:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+
+  # This container used for make a development envioroment for vscode
+  # Press **Open a Remote Window** and run **Remote-Containers: Reopen in Containers**
+  devcontainer:
+    image: nayan32biswas/{{cookiecutter.project_name}}:${GIT_BRANCH:-latest}
+    command: /bin/sh -c "while sleep 1000; do :; done"
+    volumes:
+      - ./:/app/
+
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: ./Dockerfile
+  #   container_name: shareaes_frontend
+  #   stdin_open: true
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     - REACT_APP_HOST=http://localhost:8000
+  #     - REACT_APP_API_PREFIX=/api
+  #     - REACT_APP_MEDIA_PREFIX=/media/
+  #   volumes:
+  #     - /project/frontend/node_modules/
+  #     - ./frontend/:/project/frontend/
+  # celery:
+  #   build:
+  #     context: ./server
+  #     dockerfile: ./Dockerfile
+  #     args:
+  #       PACKAGE_TYPE: --no-dev
+  #   container_name: shareaes_celery_prod
+  #   command: celery -A shareaes worker -l info
+  #   environment:
+  #     <<: *server-volume
+  #   env_file: ./config/.env
+  #   volumes:
+  #     - ./server/staticfiles:/app/server/staticfiles
+  #   depends_on:
+  #     - db
+  #     - redis
+  #   links:
+  #     - redis
+  # redis:
+  #   image: redis
+  #   container_name: shareaes_redis_prod
+  #   restart: always
+  #   ports:
+  #     - "6379:6379"
+
+volumes:
+  {{cookiecutter.project_name}}:
