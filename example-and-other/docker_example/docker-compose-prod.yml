@@ -1,0 +1,70 @@
+version: "3.7"
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: config/Dockerfile.prod
+    container_name: <project>_server_prod
+    environment:
+      - DJANGO_SETTINGS_MODULE=<project>.settings.prod
+    env_file:
+      - ./config/.env.prod.db
+      - ./config/.env.prod
+    command: gunicorn --workers 2 --backlog 2048 --threads 1 <project>.wsgi:application --bind unix:staticfiles/<project>.sock
+    # command: gunicorn --workers 2 --backlog 2048 --threads 1 <project>.wsgi:application --bind 0.0.0.0:8000
+    # ports:
+    #   - 8000:8000
+    restart: always
+    volumes:
+      - ./app/staticfiles:/project/app/staticfiles
+    depends_on:
+      - db
+
+  db:
+    image: postgres:12
+    container_name: <project>_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./config/.env.prod.db
+
+  nginx:
+    build: ./config/nginx
+    container_name: <project>_nginx_prod
+    volumes:
+      - ./app/staticfiles:/project/app/staticfiles
+    ports:
+      - 80:80
+    depends_on:
+      - server
+  redis:
+    image: redis
+    container_name: <project>_redis_prod
+    restart: always
+    expose:
+      - "6379"
+    ports:
+      - "6379:6379"
+
+  celery:
+    build:
+      context: .
+      dockerfile: config/Dockerfile.prod
+    container_name: <project>_celery_prod
+    command: celery -A <project> worker -l info
+    environment:
+      - DJANGO_SETTINGS_MODULE=<project>.settings.prod
+    env_file:
+      - ./config/.env.prod.db
+      - ./config/.env.prod
+    volumes:
+      - ./app/staticfiles:/project/app/staticfiles
+    depends_on:
+      - db
+      - redis
+    links:
+      - redis
+
+volumes:
+  postgres_data:

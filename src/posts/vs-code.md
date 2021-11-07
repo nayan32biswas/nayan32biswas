@@ -8,8 +8,12 @@
   "python.linting.pylintEnabled": false,
   "python.linting.flake8Enabled": true,
   "python.linting.enabled": true,
-  "python.linting.flake8Args": ["--max-line-length=120"],
+  "python.linting.flake8Args": [
+    "--max-line-length=255",
+    "--ignore=E402,F403,F405"
+  ], // will display error
   "python.formatting.provider": "black",
+  "python.formatting.blackArgs": ["--line-length", "90"], // formate with max 90 char
   // VS Code
   "editor.fontSize": 16,
   "editor.renderWhitespace": "all",
@@ -24,6 +28,7 @@
 
 ```json
 [
+    "github.copilot",
     "esbenp.prettier-vscode",
     "eamodio.gitlens",
     "redhat.vscode-yaml",

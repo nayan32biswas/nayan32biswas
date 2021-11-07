@@ -1,5 +1,9 @@
 const POST_CONTENT = [
   {
+    slug: "analytics",
+    content: require("!!html-loader!markdown-loader!@/posts/analytics.md"),
+  },
+  {
     slug: "android-studio",
     content: require("!!html-loader!markdown-loader!@/posts/android-studio.md"),
   },
@@ -16,8 +20,16 @@ const POST_CONTENT = [
     content: require("!!html-loader!markdown-loader!@/posts/crontab.md"),
   },
   {
+    slug: "cython.md",
+    content: require("!!html-loader!markdown-loader!@/posts/cython.md"),
+  },
+  {
     slug: "dart",
     content: require("!!html-loader!markdown-loader!@/posts/dart.md"),
+  },
+  {
+    slug: "digitalocean-python-postgresql",
+    content: require("!!html-loader!markdown-loader!@/posts/digitalocean-python-postgresql.md"),
   },
   {
     slug: "django",
@@ -56,8 +68,16 @@ const POST_CONTENT = [
     content: require("!!html-loader!markdown-loader!@/posts/heroku-django.md"),
   },
   {
+    slug: "image-converter",
+    content: require("!!html-loader!markdown-loader!@/posts/image-converter.md"),
+  },
+  {
     slug: "js",
     content: require("!!html-loader!markdown-loader!@/posts/js.md"),
+  },
+  {
+    slug: "kubernetes",
+    content: require("!!html-loader!markdown-loader!@/posts/kubernetes.md"),
   },
   {
     slug: "LetsEncrypt-certbot",
@@ -68,13 +88,9 @@ const POST_CONTENT = [
     content: require("!!html-loader!markdown-loader!@/posts/linux.md"),
   },
   {
-    slug: "live_from_local",
-    content: require("!!html-loader!markdown-loader!@/posts/live_from_local.md"),
+    slug: "live-from-local",
+    content: require("!!html-loader!markdown-loader!@/posts/live-from-local.md"),
   },
-  //   {
-  //     slug: "md_file",
-  //     content: require("!!html-loader!markdown-loader!@/posts/md_file.md"),
-  //   },
   {
     slug: "mongo",
     content: require("!!html-loader!markdown-loader!@/posts/mongo.md"),
@@ -100,6 +116,10 @@ const POST_CONTENT = [
     content: require("!!html-loader!markdown-loader!@/posts/react.md"),
   },
   {
+    slug: "server-security",
+    content: require("!!html-loader!markdown-loader!@/posts/server-security.md"),
+  },
+  {
     slug: "setup-ubuntu",
     content: require("!!html-loader!markdown-loader!@/posts/setup-ubuntu.md"),
   },
@@ -110,6 +130,14 @@ const POST_CONTENT = [
   {
     slug: "the-linux-command-line",
     content: require("!!html-loader!markdown-loader!@/posts/the-linux-command-line.md"),
+  },
+  {
+    slug: "travis-ci",
+    content: require("!!html-loader!markdown-loader!@/posts/travis-ci.md"),
+  },
+  {
+    slug: "ts",
+    content: require("!!html-loader!markdown-loader!@/posts/ts.md"),
   },
   {
     slug: "vim",

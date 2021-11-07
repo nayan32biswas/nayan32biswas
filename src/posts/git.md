@@ -154,9 +154,18 @@ git reset or git reset <file>
 - `git ls-files | xargs wc -l` count number of line **(loc)** in a project.
 - `git log` To see comited.
 
-## Commands
+## Remove cache file
 
 - `git rm --cached <expression>` Remove local cache. It's help gitignore to ignore some thing.
-- `git submodule add <url> <sub_module_folder>` Add submobule
-- `git add -p <file>` Pertial commit of a file. Select topic by n/y in a file.
-- 
+
+## submobule
+### Add Add submodule
+- `git submodule add <url> <sub_module_folder>`
+### Delete Submodule
+1. Delete the relevant section from the `.gitmodules` file.
+2. `git add .gitmodules` Stage the .gitmodules changes.
+3. Delete the relevant section from .git/config.
+4. `git rm --cached path_to_submodule` Remove the submodule files from the working tree and index(no trailing slash).
+5. `rm -rf .git/modules/path_to_submodule` Remove the submodule's .git directory.
+6. `git commit -m "Removed submodule <name>"` Commit the changes.
+7. `rm -rf path_to_submodule` Delete the now untracked submodule files.

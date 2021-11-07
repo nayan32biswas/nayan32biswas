@@ -189,7 +189,8 @@ fi
 
 ## Show line In VI Editor
 
-- `vi .vimrc` > `set number` To show line number in editor
+- `vi .vimrc` Open **.vimrc**
+  - `set number` To show line number in editor
 
 ## [ZSH For Attractive terminal](https://ohmyz.sh/)
 

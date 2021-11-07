@@ -28,6 +28,10 @@ sudo gitlab-runner register --non-interactive --url "https://gitlab.com/" --regi
 
 - `docker login registry.gitlab.com` First login.
 
+## Config Example
+
+- File Name **.travis.yml**
+
 ```yaml
 image: docker:latest
 services:

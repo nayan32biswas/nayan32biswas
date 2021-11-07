@@ -370,7 +370,7 @@ func testMethod() {
 	obj.print()
 }
 ```
-### Interfaces
+## Interfaces
 ```go
 // Writer defination
 type Writer interface {
@@ -390,7 +390,214 @@ func interfaces() {
 	var console Writer = ConsoleWriter{}
 	console.Writer([]byte("demo data"))
 }
+func typeCheckWithInterface() {
+	var value interface{} = 0
+	switch value.(type) {
+	case int:
+		fmt.Println("This is int type")
+	case string:
+		fmt.Println("This is string type")
+	case byte:
+		fmt.Println("This is byte type")
+	default:
+		fmt.Println("Unknown type")
+	}
+}
+```
 
+## GO Routine
+
+### Synchronous Councerency
+```go
+var wg = sync.WaitGroup{}
+var counter = 0
+
+func print() {
+	fmt.Printf("%v, ", counter)
+	wg.Done()
+}
+func increment() {
+	counter++
+	wg.Done()
+}
+func goRoutine() {
+	for i := 0; i < 10; i++ {
+		wg.Add(2)
+		go print()
+		go increment()
+	}
+	wg.Wait()
+	fmt.Println("")
+}
+// 2, 3, 4, 1, 8, 5, 9, 10, 8, 8,
+```
+
+###  Sequential Councerency
+
+```go
+var wg = sync.WaitGroup{}
+var counter = 0
+var m = sync.RWMutex{}
+
+func print() {
+	m.RLock() // read lock
+	fmt.Printf("%v, ", counter)
+	m.RUnlock() // read unlock
+	wg.Done()
+}
+func increment() {
+	m.Lock() // write lock
+	counter++
+	m.Unlock() // write unlock
+	wg.Done()
+}
+func goRoutine() {
+	for i := 0; i < 10; i++ {
+		wg.Add(2)
+		go print()
+		go increment()
+	}
+	wg.Wait()
+	fmt.Println("")
+}
+// 1, 2, 2, 2, 2, 2, 2, 2, 2, 3,
+```
+
+### Synchronization With GO Routine
+
+```go
+var wg = sync.WaitGroup{}
+var counter = 0
+var m = sync.RWMutex{}
+
+func print() {
+	fmt.Printf("%v, ", counter)
+	m.RUnlock()
+	wg.Done()
+}
+func increment() {
+	counter++
+	m.Unlock()
+	wg.Done()
+}
+func goRoutine() {
+	for i := 0; i < 10; i++ {
+		wg.Add(2)
+		m.RLock()
+		go print()
+		m.Lock()
+		go increment()
+	}
+	wg.Wait()
+	fmt.Println()
+}
+// 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+```
+
+## CHANNELS
+
+### Basic Channels
+```go
+var wg = sync.WaitGroup{}
+
+func channels() {
+	ch := make(chan int)
+	wg.Add(2)
+	go func() {
+		val := <-ch
+		fmt.Printf("Receiver: %v\n", val)
+		wg.Done()
+
+	}()
+	go func() {
+		temp := 10
+		ch <- temp
+		temp = 27
+		fmt.Printf("Sender: %v\n", temp)
+		wg.Done()
+
+	}()
+	wg.Wait()
+}
+```
+
+
+### Channels with chan args and close
+
+```go
+var wg = sync.WaitGroup{}
+
+func channels() {
+	ch := make(chan int)
+	wg.Add(2)
+	go func(ch <-chan int) {
+		fmt.Println("Receiver start")
+		for val := range ch {
+			fmt.Printf("Receiver: %v\n", val)
+		}
+		fmt.Println("Receiver end")
+		wg.Done()
+	}(ch)
+	go func(ch chan<- int) {
+		fmt.Println("Sender start")
+		ch <- 0
+		ch <- 1
+		fmt.Println("Sender mid")
+		ch <- 2
+		ch <- 3
+		close(ch)
+		fmt.Println("Sender end")
+		wg.Done()
+
+	}(ch)
+	wg.Wait()
+}
+/*
+Receiver start
+Sender start
+Receiver: 0
+Receiver: 1
+Sender mid
+Receiver: 2
+Receiver: 3
+Sender end
+Receiver end
+*/
+```
+### Logger with channels
+```go
+const (
+	logInfo    = "INFO"
+	logWarning = "WARNING"
+	logError   = "ERROR"
+)
+
+type logEntry struct {
+	time     time.Time
+	severity string
+	message  string
+}
+
+var logCh = make(chan logEntry, 50)
+var doneCh = make(chan struct{})
+
+func logger() {
+	for { // infinite loog
+		select { // this selector will activate when new entry will come in
+		case entry := <-logCh:
+			fmt.Printf("%v - [%v]%v\n", entry.time.Format("2006-01-02T15:04:05"), entry.severity, entry.message)
+		case <-doneCh:
+			break
+		}
+	}
+}
+
+func channels() {
+	go logger() // will destroy when channels destroy
+	logCh <- logEntry{time.Now(), logInfo, "App is starting"}
+	logCh <- logEntry{time.Now(), logInfo, "App is shutting down"}
+	time.Sleep(100 * time.Microsecond)
+}
 ```
 ## Installetion
 ### Documented way
@@ -400,4 +607,24 @@ func interfaces() {
 ### Using Snap
 - `sudo apt-get update; sudo apt-get -y upgrade; sudo snap install go --classic` Update, Upgrade and install.
 - `go version` Check version
-- `go run file.go` Build & run go file
+
+### (Install air for development)[https://github.com/cosmtrek/air]
+- `curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh | sh -s -- -b $(go env GOPATH)/bin` Install air.
+- `cd ./project-file`
+- `air init` Initializer air on project setup.
+- `air` run project by **typing air**.
+
+## Userful command
+- `go mod init github.com/you/hello` Initiate project, will create **go.mod** to track dependency.
+- `go mod edit -dropreplace github.com/author/project`
+- `go mod tidy` Will remove unused packages from **go.mod** file. Make sure to run this before **every release**.
+- `go mod download` Download packages.
+**Get Packages** from git repo, It will create **go.sum** for package/dependecy validation.
+- `go get github.com/author/project@v1.1.1` use Git tags.
+- `go get github.com/author/project@master` or Git branch name.
+- `go get github.com/author/project@23r2s4c` or Git commit hash.
+- `go get -u` Update packages.
+- `go test` Test the project. It will automatically download packages.
+- `go build` Build the project. It will automatically download packages.
+- `go run file.go` Build & run go file.
+- `go run -rece file.go` Check warnings.

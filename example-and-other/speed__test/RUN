@@ -1,0 +1,6 @@
+g++ cpp.cpp; ./a.out 500000 20000
+dart dart.dart 500000 20000
+go build go.go; ./go 500000 20000
+javac java.java && java Main 500000 20000
+node js.js 500000 20000
+python3 python.py 500000 20000

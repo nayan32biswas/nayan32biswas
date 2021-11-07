@@ -1,0 +1,20 @@
+version: "3.7"
+
+x-volumes: &server-volume
+  SECRET_KEY: ${SECRET_KEY}
+  HOST_URL: "http://localhost"
+  DJANGO_SETTINGS_MODULE: "devspreneur.settings.prod"
+
+services:
+  server:
+    build:
+      context: ./app
+      dockerfile: ./Dockerfile.prod
+    container_name: devspreneur_server_prod_test
+    command: gunicorn --workers 2 --backlog 2048 --threads 1 devspreneur.wsgi:application --bind 0.0.0.0:8000
+    ports:
+      - 8000:8000
+    environment:
+      <<: *server-volume
+    volumes:
+      - ./app/staticfiles:/project/app/staticfiles
