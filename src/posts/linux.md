@@ -41,7 +41,6 @@ This is very restricted permission. Commonly don't do it.
 - `find <full path> -name <DIRNAME> -type f` **Find a file** in a directory recursively.
 - `find <full path> -name <DIRNAME> -type d` **Find a directory** in a directory recursively.
 - `find . -type f -name "<expression>" -delete` Delete file recursively match with wildcard.
-- `sudo find . -type d -name "node_modules" -exec rm -r "{}" \;` Delete directory recursively match with wildcard.
 - `find <DIRNAME> -type f | wc -l` **Count number of file** in this directory recursively.
 - `find <DIRNAME> -type d | wc -l` **Count number of directory** in this directory recursively.
 - `tar -czvf <new_file_name>.tar.gz <filename>.sql` **Compress a file** or make zip
@@ -50,6 +49,9 @@ This is very restricted permission. Commonly don't do it.
 - `find directory_name -type f -size +100M`
 - `find demo/ -type f -size +20M | wc -l` **count files bigger** than specific filesize
 - `find demo/ -type f -size +10M -size -60M | wc -l` count files bigger than specific filesize **range**.
+- `find . -name "<expression>" -exec mv '{}' <folder>/ \;` Move file with match.
+- `find projects/ -type d -name "node_modules" -exec rm -rf {} +;` Delete folder by match.
+
 
 ## Hardware Infrormation
 
