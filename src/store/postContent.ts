@@ -20,7 +20,7 @@ const POST_CONTENT = [
     content: require("!!html-loader!markdown-loader!@/posts/crontab.md"),
   },
   {
-    slug: "cython.md",
+    slug: "cython",
     content: require("!!html-loader!markdown-loader!@/posts/cython.md"),
   },
   {

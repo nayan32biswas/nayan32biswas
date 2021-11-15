@@ -45,6 +45,15 @@ const POST = [
     shortDescription: `shortDescription`,
   },
   {
+    slug: "cython",
+    name: "cython",
+    isPublished: true,
+    coverImage: "",
+    tags: ["cython"],
+    relatedPosts: [""],
+    shortDescription: `cython`,
+  },
+  {
     slug: "dart",
     name: "dart",
     isPublished: true,
@@ -189,8 +198,8 @@ const POST = [
     shortDescription: `shortDescription`,
   },
   {
-    slug: "live_from_local",
-    name: "live_from_local",
+    slug: "live-from-local",
+    name: "live-from-local",
     isPublished: true,
     coverImage: "",
     tags: ["server", "local"],

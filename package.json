@@ -7,12 +7,16 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "check-error": "node check-error.js"
+    "prepare": "husky install",
+    "check-errors": "echo ' run <ts-node ./src/check-errors.ts>'"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn check-error",
-      "pre-push": "echo 'OK'"
+      "pre-commit": "yarn check-errors",
+      "post-commit": "echo 'post-commit'",
+      "pre-push": "echo 'pre-push'",
+      "post-checkout": "echo 'post-checkout'",
+      "post-merge": "echo 'post-merge'"
     }
   },
   "dependencies": {
@@ -22,6 +26,7 @@
     "html-loader": "1.1.0",
     "markdown-loader": "^6.0.0",
     "marked": "^2.0.3",
+    "ts-node": "^10.4.0",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-pdf": "^4.2.0",

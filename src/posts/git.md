@@ -169,3 +169,14 @@ git reset or git reset <file>
 5. `rm -rf .git/modules/path_to_submodule` Remove the submodule's .git directory.
 6. `git commit -m "Removed submodule <name>"` Commit the changes.
 7. `rm -rf path_to_submodule` Delete the now untracked submodule files.
+
+
+## Git Pre-commit
+
+### [setup husky](https://typicode.github.io/husky/#/)
+- `npm install husky --save-dev`
+- `npx husky install`
+- `npm set-script prepare "husky install"`
+- `npx husky add .husky/pre-commit "npm test"`
+- Write shell inside **.busky/pre-commit** file
+
