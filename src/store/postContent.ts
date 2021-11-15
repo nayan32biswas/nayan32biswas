@@ -92,6 +92,10 @@ const POST_CONTENT = [
     content: require("!!html-loader!markdown-loader!@/posts/live-from-local.md"),
   },
   {
+    slug: "migration-and-backup",
+    content: require("!!html-loader!markdown-loader!@/posts/migration-and-backup.md"),
+  },
+  {
     slug: "mongo",
     content: require("!!html-loader!markdown-loader!@/posts/mongo.md"),
   },
