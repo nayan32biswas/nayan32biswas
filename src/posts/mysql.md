@@ -3,8 +3,8 @@
 ## Setup Mysql
 
 ```bash
-sudo apt-get install mysql-server
-sudo mysql_secure_installation
+sudo apt install mysql-server
+sudo mysql_secure_installation - set password
     0
     password
     password
@@ -408,4 +408,17 @@ YEAR: A year value with the format of (YYYY)
                 ON students.student_id=scores.student_id WHERE scores.score <= 15 ORDER BY scores.test_id;
 	a. An INNER JOIN gets all rows of data from both tables if there is a match between columns in both tables
 	b. Here Im getting all the data for all quizzes and matching that data up based on student ids
+```
+
+
+## Uninstall or Remove my sql
+
+### In Ubuntu
+
+```bash
+sudo systemctl stop mysql
+sudo apt-get purge mysql-server mysql-client mysql-common mysql-server-core-* mysql-client-core-*
+sudo rm -rf /etc/mysql /var/lib/mysql
+sudo apt autoremove
+sudo apt autoclean
 ```
