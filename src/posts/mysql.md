@@ -398,7 +398,7 @@ YEAR: A year value with the format of (YYYY)
 
 => SELECT students.student_id, CONCAT(students.first_name, " ", students.last_name) AS Name, COUNT(absences.date) AS Absences FROM students, absences 
                 WHERE students.student_id = absences.student_id GROUP BY students.student_id;
-	a. If we wanted a list of the number of absences per student we have to group by student_id or we would get just one result
+	a. If we wanted a list of the number of absences per student we have to GROUP BY student_id or we would get just one result
 
 => SELECT students.student_id, CONCAT(students.first_name, " ", students.last_name) AS Name, COUNT(absences.date) AS Absences FROM students LEFT JOIN absences
 	            ON students.student_id = absences.student_id GROUP BY students.student_id;
@@ -419,20 +419,40 @@ YEAR: A year value with the format of (YYYY)
 ### Query
 
 - Total post before or after '2021-12-10'
-`SELECT count(id) as total_post FROM post where published_at between '2021-12-10' and '2021-12-15';`
+`SELECT COUNT(id) as total_post FROM post WHERE published_at BETWEEN '2021-12-10' and '2021-12-15';`
 
 - Text match
-`SELECT * FROM user where username like '%32biswas-1%';`
+`SELECT * FROM user WHERE username LIKE '%32biswas-1%';`
 
 - Match posts that published on 15th of any month
-`SELECT * FROM post where published_at like "____-__-15%";`
+`SELECT * FROM post WHERE published_at LIKE "____-__-15%";`
 
 - Count total vote by posts
-`select post_id, count(id) from post_vote group by post_id;`
+`SELECT post_id, COUNT(id) FROM post_vote GROUP BY post_id;`
 
-- Post list with comment count
-`select post.id, post.title, post.slug, count(comment.id) as comment_count from comment left join post on comment.post_id = post.id group by post.id;`
+- Post list with comment count and vote count
+```sql
+SELECT post.id, post.title, post.slug, COUNT(distinct comment.id) as total_comment, COUNT(distinct post_vote.id) as total_vote FROM post 
+left JOIN comment ON post.id = comment.post_id 
+left JOIN post_vote ON post.id = post_vote.post_id
+GROUP BY post.id;
+```
 
+- Get post full details
+```sql
+-- Post details
+SELECT * FROM post WHERE id = 3;
+-- images for post
+SELECT image.* FROM post_image JOIN image ON image.id = post_image.id WHERE post_image.post_id = 3;
+-- tags for post
+SELECT tag.* FROM post_tag JOIN tag ON tag.id = post_tag.tag_id WHERE post_tag.post_id = 3;
+-- comment list for post with user info
+SELECT comment.*, user.id, user.username, user.full_name FROM comment JOIN user ON comment.user_id = user.id WHERE comment.post_id = 3;
+-- comment list for post with user info
+SELECT comment.*, user.username, user.full_name FROM comment JOIN user ON comment.user_id = user.id WHERE comment.post_id = 3;
+-- vote list for post with user info
+SELECT post_vote.*, user.username, user.full_name FROM post_vote JOIN user ON post_vote.user_id = user.id WHERE post_vote.post_id = 3;
+```
 
 
 ## Uninstall or Remove mysql
