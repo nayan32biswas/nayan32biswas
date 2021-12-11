@@ -411,7 +411,31 @@ YEAR: A year value with the format of (YYYY)
 ```
 
 
-## Uninstall or Remove my sql
+## Example
+
+### Create tables for a blog from [here](https://github.com/nayan32biswas/nayan32biswas/blob/main/src/posts/blog_schema.sql)
+
+
+### Query
+
+- Total post before or after '2021-12-10'
+`SELECT count(id) as total_post FROM post where published_at between '2021-12-10' and '2021-12-15';`
+
+- Text match
+`SELECT * FROM user where username like '%32biswas-1%';`
+
+- Match posts that published on 15th of any month
+`SELECT * FROM post where published_at like "____-__-15%";`
+
+- Count total vote by posts
+`select post_id, count(id) from post_vote group by post_id;`
+
+- Post list with comment count
+`select post.id, post.title, post.slug, count(comment.id) as comment_count from comment left join post on comment.post_id = post.id group by post.id;`
+
+
+
+## Uninstall or Remove mysql
 
 ### In Ubuntu
 
