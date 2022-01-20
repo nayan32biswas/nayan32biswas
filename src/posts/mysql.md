@@ -453,6 +453,11 @@ SELECT comment.*, user.username, user.full_name FROM comment JOIN user ON commen
 -- vote list for post with user info
 SELECT post_vote.*, user.username, user.full_name FROM post_vote JOIN user ON post_vote.user_id = user.id WHERE post_vote.post_id = 3;
 ```
+- Get comment
+```sql
+-- get users all comment
+
+```
 
 
 ## Uninstall or Remove mysql
