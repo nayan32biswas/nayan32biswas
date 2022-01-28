@@ -12,6 +12,32 @@ __testing__/**
 **.txt
 
 
+# ============================== Python ==============================
+**/__pycache__
+#pyenv
+.python-version
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+
+# ============================== Django ==============================
+*.sqlite3
+# Staticfiles
+server/staticfiles/media/**
+server/staticfiles/static/**
+server/staticfiles/debug_log/**
+server/staticfiles/build/**
+#celery
+celerybeat-schedule.*
+# Unit test / coverage reports
+.tox/
+.coverage
+.coverage.*
+.cache
+*.cover
+
+
 # ============================== NODE ==============================
 **node_modules
 # Hide react source code
@@ -21,6 +47,16 @@ __testing__/**
 dist
 dist-ssr
 *.local
+
+
+# ============================== React ==============================
+**/build
+**/.pnp
+**/.pnp.js
+**/testing
+**/coverage
+**/production
+**/misc
 
 
 # ============================== VUE ==============================
