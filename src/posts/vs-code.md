@@ -14,6 +14,7 @@
   ], // will display error
   "python.formatting.provider": "black",
   "python.formatting.blackArgs": ["--line-length", "90"], // formate with max 90 char
+  "python.analysis.typeCheckingMode": "basic",
   // VS Code
   "editor.fontSize": 16,
   "editor.renderWhitespace": "all",
