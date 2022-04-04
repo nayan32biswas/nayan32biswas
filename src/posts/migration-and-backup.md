@@ -11,6 +11,7 @@
 
 ## Mongodb database import export
 
+- Set all connection-url without password
 - `mongoexport --uri <connection-url> --collection <table> --out demo.json` Export single table.
 
 - `mongodump --uri <connection-url> --out ./<file>` Export full database.
