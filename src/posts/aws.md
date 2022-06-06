@@ -13,7 +13,7 @@
 - `aws ec2 describe-instances` To chec connection.
 
 
-## AWS Elastic Beanstalk
+## Elastic Beanstalk
 
 ### [Create Project](https://us-east-2.console.aws.amazon.com/elasticbeanstalk/home)
 - Create a new environment
@@ -68,6 +68,37 @@
   - SSL policy: Select latest policy
   - ADD
 - Apply
+
+
+## [Elastic Beanstalk and CloudWatch Logs](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.cloudwatchlogs.html)
+
+- View logs from **Logs -> Logs Insights** or **Martics -> Explore**
+
+### Setup CloudWatch logs in EB
+- Inside Application Configuration
+- Edit Software settings
+- Instance log streaming to CloudWatch Logs
+  - Enable Log streaming
+
+### CloudWatch Matircs
+- Create [CloudWatch Dashboard](https://us-east-2.console.aws.amazon.com/cloudwatch/home)
+  - Name
+  - Select **Explore**
+  - Select Elastic Beanstalk
+  - Add filter matrics
+
+### Filter CloudWatch nginx/access.log
+
+- Logs Insights
+  - Select `/aws/elasticbeanstalk/<application-env>/var/log/nginx/access.log`
+
+```sql
+fields @timestamp, @message
+| sort @timestamp desc
+| filter @message like " 500 " and @message like "GET"
+| limit 20
+```
+
 
 
 ## AWS CodePipline
