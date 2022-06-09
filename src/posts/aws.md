@@ -120,6 +120,12 @@ fields @timestamp, @message
      2. Select Project-env
   9. Save
 
+### Problem and Solution
+
+- **Problem**
+- Deployment failed. The provided role does not have sufficient permissions:
+- **Solution**
+- To resolve the issue - Add **"logs:*"** in the Actions array of the first block. As this gives permission form EBS to Cloudwatch logs.
 
 
 ## Certificate Manager
