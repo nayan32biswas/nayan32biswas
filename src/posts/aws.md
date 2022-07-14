@@ -113,6 +113,19 @@ fields @timestamp, @message
   4. Branch Name
   5. CodePipeline default
   6. Next
+  7. Add build stage
+     1. Skip build stage
+  8. Select **AWS Elastic Beanstalk**
+     1. Select Project
+     2. Select Project-env
+  9. Save
+
+### Problem and Solution
+
+- **Problem**
+- Deployment failed. The provided role does not have sufficient permissions:
+- **Solution**
+- To resolve the issue - Add **"logs:*"** in the Actions array of the first block. As this gives permission form EBS to Cloudwatch logs.
 
 
 ## Certificate Manager
