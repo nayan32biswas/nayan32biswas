@@ -12,6 +12,12 @@
   - Blank
 - `aws ec2 describe-instances` To chec connection.
 
+## NAT Gateway
+- [Create NAT Gateway](https://us-east-1.console.aws.amazon.com/vpc/home?region=us-east-1#NatGateways:)
+- [Create route table](https://us-east-1.console.aws.amazon.com/vpc/home?region=us-east-1#RouteTables:)
+  - Allocate created VPC-<id> that created with NAT Gateway.
+  - Update route table. Add `0.0.0.0/0` with target `nat-<id>` from NAT Gateway
+- [Create Subnet]()
 
 ## Elastic Beanstalk
 
@@ -135,4 +141,25 @@ fields @timestamp, @message
 - Create certificate and key with OpenSSL
 - [Import Certificate](https://us-east-2.console.aws.amazon.com/acm/home?region=us-east-2#/certificates/import)
 - Submit **Certificate body** and **Certificate private key** that create with open ssl
-- 
+
+
+## AWS WAF
+
+### [WAF & Shield API rate limit](https://us-east-1.console.aws.amazon.com/wafv2/homev2/web-acls)
+
+1. Setp 1
+- Fillup name and CloudWatch metric name
+- Add AWS resources
+  - Select Application load balancer
+- Next
+- Rules
+  - Add my own rules and rule group
+    - Rule builder
+    - name
+    - rate-base rule
+    - 100
+    - Remain all other as default.
+2. Remain all other as default.
+3. Remain all other as default.
+4. Remain all other as default.
+5. Remain all other as default.
