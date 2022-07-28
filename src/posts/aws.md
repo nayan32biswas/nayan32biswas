@@ -37,6 +37,47 @@
   - Create environment
 
 
+
+### Setup NAT Gateway
+
+- [Create NAT Gateway](https://us-east-1.console.aws.amazon.com/vpc/home?region=us-east-1#NatGateways:)
+  - Makesure you identify the name
+- [Create Route Table for NAT Gateway](https://us-east-1.console.aws.amazon.com/vpc/home?region=us-east-1#CreateRouteTable:)
+  - Makesure you identify the name
+  - Edit route table
+    - Edit routes
+      - Destination 0.0.0.0/0
+      - Target newly created nat-gateway
+- [Create 2 Subnet for NAT Gateway](https://us-east-1.console.aws.amazon.com/vpc/home?region=us-east-1#CreateSubnet:)
+  - Edit Subnet
+    - Edit route table association inside **Route table**
+    - Alocate default route tatble to route table for NAT Gateway
+
+### Elastic Beanstalk with high availability
+
+- Create new EBS web instance
+  - To set up NAT Gateway Check **Configure More Option**
+    - select high availability
+    - Network
+      - Load balancer subnets
+        - select public subnet for public IP
+      - Un mark **Public IP address**
+      - Instance subnets
+        - select private NAT Gateway for private IP
+- Setup **WSGIPath** in Configuration -> software `app.main:app --worker-class=uvicorn.workers.UvicornWorker`
+- Setup enviroment variable in Configuration -> software
+
+  - Generate secrets with python command `secrets.token_hex(32)`.
+  - Don't edit `PYTHONPATH` on env.
+  - For firebase credintial create hash from firebase credintial file with `base64 admin-sdk.json`.
+
+- Enable **Log streaming** for **Instance log streaming to CloudWatch Logs**.
+- set `client_max_body_size 100M;` in **.platform/nginx/conf.d/proxy.conf** for upload content size.
+- SSL certification
+  - [Request ssl certificate](https://us-east-1.console.aws.amazon.com/acm/home?region=us-east-1#/certificates/request)
+  - Set **CNAME name** and **CNAME value** if your domain provider with domain.
+
+
 ### [Install EB CLI](https://github.com/aws/aws-elastic-beanstalk-cli-setup)
 - https://github.com/aws/aws-elastic-beanstalk-cli-setup
 - python ./aws-elastic-beanstalk-cli-setup/scripts/ebcli_installer.py
