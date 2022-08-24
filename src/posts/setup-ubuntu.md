@@ -55,6 +55,42 @@ sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/v
 sudo apt update; sudo apt install code
 ```
 
+### Setup global **setting.json**
+
+- `$HOME/.config/Code/User/settings.json` for linux
+- `$HOME/Library/Application\ Support/Code/User/settings.json` for mac.
+- `%APPDATA%\Code\User\settings.json` for windows.
+
+```json
+{
+  // VS Code
+  "[jsonc]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[json]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[markdown]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "editor.fontSize": 16,
+  "editor.renderWhitespace": "all",
+  "workbench.colorTheme": "One Dark Pro",
+  "window.zoomLevel": -1,
+  "workbench.preferredLightColorTheme": "Default Dark+",
+  "window.titleBarStyle": "custom",
+  // VS Code Ligature
+  "editor.fontFamily": "'Fira Code'",
+  "editor.fontLigatures": "'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'zero', 'onum'",
+  // Python
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": true,
+  "python.linting.enabled": true,
+  "python.linting.flake8Args": [
+    "--max-line-length=255"
+    //   "--ignore=E402,F403,F405"
+  ], // will display error
+  "python.formatting.provider": "black",
+  "python.formatting.blackArgs": ["--line-length", "90"], // formate with max 90 char
+  "python.analysis.typeCheckingMode": "basic"
+}
+```
+
 ## Install Or update VsCode
 
 ```bash
