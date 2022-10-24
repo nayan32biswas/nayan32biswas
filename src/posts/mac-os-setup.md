@@ -34,3 +34,10 @@ Host <server-name>
     IdentityFile ~/.ssh/<file-name>.pem
 ```
 
+## Install vscode
+
+- Download universal file. Extract the file and move to the Applications folder.
+- Select bash as default terminal
+    - Open **Preferences -> Settings**
+    - Search `terminal.integrated.shellArgs: Osx`
+    - Select **bash** as default.
