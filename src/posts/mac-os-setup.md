@@ -19,6 +19,16 @@
 1. `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
 2. `echo "export PATH=/opt/homebrew/bin:$PATH" >> ~/.bash_profile` If brew path is not found.
 3. `brew install wegt git`
+   Add auto completion bash for git
+   - Download the bash `curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash`
+   - Modify file permission `chmod +x ~/.git-completion.bash`
+   - Add git-completion file in you **.bash_profile**
+    ```sh
+        if [ -f ~/.git-completion.bash ]; then
+            ~/.git-completion.bash
+        fi
+    ```
+  
 
 ## Configure SSH if needed
 
