@@ -343,8 +343,8 @@ Create **LICENSE** and Assign MIT License
 - `python3 setup.py sdist bdist_wheel` make sure **`.whl`** and **`.tar.gz`** file exist inside **/dist/**.
 - `python3 -m pip install --user --upgrade twine` Install **twine** to upload into PyPi.
 - `python3 -m twine upload --repository testpypi dist/*` Upload your project to PyPi as **Test**.
-- `twine check dist/*` Check doc is currect or not.
-- `twine upload dist/*` Finally Upload your file.
+- `python3 -m twine check dist/*` Check doc is currect or not.
+- `python3 -m twine upload dist/*` Finally Upload your file.
 
 
 # Setup Python

@@ -76,12 +76,12 @@ git push -u origin --tags
     User git
     IdentityFile ~/.ssh/id_rsa
 
-   Host <gitlab.com-anyname>
+   Host <gitlab.com-any-name>
     HostName gitlab.com
     User git
     IdentityFile ~/.ssh/<your-filename>
    ```
-- `git clone git@<<<gitlab.com-anyname>>>:yourrepo-username/project.git`
+- `git clone git@<<<gitlab.com-any-name>>>:your-repo-username/project.git`
 
 
 ## Branch
@@ -117,7 +117,7 @@ git merge <common>
 
 ## Rebase
 
-let say Here are two brance `<master>` and `<common>`. Now rebase or combain `<common>` into `<master>` though `<master>` is already changed.
+let say Here are two branch `<master>` and `<common>`. Now rebase or combine `<common>` into `<master>` though `<master>` is already changed.
 
 - `git checkout master`
 - `git pull origin master`
@@ -152,13 +152,13 @@ git reset or git reset <file>
 ## Tools
 
 - `git ls-files | xargs wc -l` count number of line **(loc)** in a project.
-- `git log` To see comited.
+- `git log` To see committed.
 
 ## Remove cache file
 
 - `git rm --cached <expression>` Remove local cache. It's help gitignore to ignore some thing.
 
-## submobule
+## submodule
 ### Add Add submodule
 - `git submodule add <url> <sub_module_folder>`
 ### Delete Submodule
@@ -178,5 +178,171 @@ git reset or git reset <file>
 - `npx husky install`
 - `npm set-script prepare "husky install"`
 - `npx husky add .husky/pre-commit "npm test"`
-- Write shell inside **.busky/pre-commit** file
+- Write shell inside **.husky/pre-commit** file
 
+
+## Git merge and rebase with example
+
+#### Initialize new repository
+
+First initiate project add build a base line where we will be start every time.
+
+Here, **t[n]** will be the time when commit was added and it's incremental. **m[n]** was the commit in main branch and **f[n]** was the commit in feature branch.
+
+Add change with commit **m1** at time **t1**
+
+```bash
+mkdir git-test; cd git-test
+git init
+echo "m1" >> main.md
+git add . && git commit -m "m1"
+```
+
+You want to add new feature in this repository. Add change with commit **f1** at time **t2**
+
+```bash
+git checkout -b feature
+echo "f1" >> feature.md
+git add . && git commit -m "f1"
+```
+
+Let's imagine after adding feature f1 in feature branch some one add new functionality in main branch with commit **m2** at time **t3**.
+
+```bash
+git checkout main
+echo "m2" >> main.md
+git add . && git commit -m "m2"
+```
+
+And you added new feature **f2** in the feature branch at time **t4**
+
+```bash
+git checkout feature
+echo "f2" >> feature.md
+git add . && git commit -m "f2"
+```
+
+After all of this the log tree will look like this.
+
+```
+     f1[t2]--------f2[t4]  feature
+     /
+    /
+---m1[t1]----m2[t3]        main
+```
+
+Now there has multiple way to add feature functionality with our main branch.
+
+### Merge feature branch and main branch
+
+#### git merge feature
+
+**First initialize the project**
+
+Directly merge feature branch into the main branch and add default commit **m3'** at time **t5**
+
+```bash
+git checkout main
+git merge feature
+```
+
+Let's look into the log tree.
+
+```
+     f1[t2]----------------f2[t4]         feature
+     /     \                    \
+    /       \                    \
+---m1[t1]----f1[t2]----m2[t3]----m3'[t5]  main
+```
+
+This merge command will add all commit from feature branch and will add them with main branch commits at chronological order.
+
+#### git merge --squash feature
+
+**First initialize the project**
+
+Merge feature branch into the main branch and add default commit **m3'** at time **t5**
+
+```bash
+git checkout main
+git merge --squash feature
+git add . && git commit -m "m3'"
+```
+
+Let's look into the log tree.
+
+```
+     f1[t2]--------f2[t4]        feature
+     /                 \
+    /                   \
+---m1[t1]----m2[t3]----m3'[t5]   main
+```
+
+This merge with --squash option will add all change in feature branch to main branch and change will added as new change. After the command you need to add commit message **m3'** for the change.
+
+### Rebase feature branch and main branch
+
+#### git rebase main
+
+**First initialize the project**
+
+Rebase **feature** branch with **main** branch.
+
+```bash
+git checkout feature
+git rebase main
+```
+
+After running above command the log of feature branch will change from `m1[t1]----f1[t2]----f2[t4]` to `m1[t1]----m2[t3]----f1[t2]----f2[t4]`. The commit order won't flow the chronological order. And log tree will look like this.
+
+```
+      m2[t3]----f1[t2]----f2[t4]   feature
+     /
+    /
+---m1[t1]----m2[t3]                 main
+```
+
+#### git rebase feature
+
+**First initialize the project**
+
+Rebase **feature** branch with **main** branch.
+
+```bash
+git checkout main
+git rebase feature
+```
+
+After running above command the log of mail branch will change from `m1[t1]----m2[t3]` to `m1[t1]---f1[2]----f2[t4]----m2[t3]`. The commit order won't flow the chronological order. And log tree will look like this.
+
+```
+     f1[t2]-----f2[t4]                 feature
+     /     \        \
+    /       \        \
+---m1[t1]----f1[2]----f2[t4]----m2[t3] main
+```
+
+Rebase does not follow chronological order to generate new log.
+
+### Combine Merge and Rebase
+
+#### Combine merge and rebase command to add feature branch to main branch
+
+**First initialize the project**
+
+```bash
+git checkout feature
+git rebase main
+
+git checkout main
+git merge feature
+```
+
+After running above command the log of feature branch will change from `m1[t1]----f1[t2]----f2[t4]` to `m1[t1]----m2[t3]----f1[t2]----f2[t4]` and log of main branch will also become `m1[t1]----m2[t3]` to `m1[t1]----m2[t3]----f1[t2]----f2[t4]`. After all of the command log tree will look like this.
+
+```
+      m2[t3]----f1[t2]----f2[t4]       feature
+     /     \         \        \
+    /       \         \        \
+---m1[t1]----m2[t3]----f1[2]----f2[t4] main
+```
