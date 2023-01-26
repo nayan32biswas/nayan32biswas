@@ -252,7 +252,7 @@ Let's look into the log tree.
      f1[t2]----------------f2[t4]         feature
      /     \                    \
     /       \                    \
----m1[t1]----f1[t2]----m2[t3]----m3'[t5]  main
+---m1[t1]----f1[t2]----m2[t3]----f2[t4]-----m3'[t5]  main
 ```
 
 This merge command will add all commit from feature branch and will add them with main branch commits at chronological order.
