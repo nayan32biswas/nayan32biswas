@@ -1,5 +1,3 @@
-👋 My portfolio [nayan32biswas.github.io](https://nayan32biswas.github.io/)
+👋 My portfolio [nayan32biswas.github.io](https://vigintuple.github.io/)
 
-- [All Cheat Sheet](https://github.com/nayan32biswas/nayan32biswas/tree/main/src/posts)
-
-👀 Find me on [google](https://www.google.com/search?q=nayan32biswas)
+- [All Cheat Sheet](https://github.com/vigintuple/vigintuple/tree/main/src/posts)
