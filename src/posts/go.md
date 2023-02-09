@@ -259,7 +259,7 @@ func struct_func(){
 		speed: 40.6,
 		canFly: true,
 	}
-	fmt.Println(bird, bird.name) // {{unknown  1.2} 40.6 0 true} unknown
+	fmt.Println(bird, bird.name) // ((unknown  1.2) 40.6 0 true) unknown
 }
 ```
 ## Manipulation
