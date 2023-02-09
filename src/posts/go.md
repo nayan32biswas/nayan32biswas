@@ -1,9 +1,9 @@
 # GO
 
 ## Variable
-- If any variable declare that **start with Uppercase** those variable **exported** from the package and sccessable from other package.
+- If any variable declare that **start with Uppercase** those variable **exported** from the package and accessible from other package.
 ### Global Variable
-- It's a package level or global veriable
+- It's a package level or global variable
 - In package there need to define type of each variable
 
 1. 
