@@ -1,6 +1,8 @@
 # VS Code
 
-### `.vscode/setting.json`
+## VSCode settings
+
+### .vscode/setting.json
 
 ```json
 {
@@ -40,15 +42,20 @@ Create file inside projects **.vscode/extensions.json**. Open EXTENSIONS and wri
         "eamodio.gitlens",
         "redhat.vscode-yaml",
         "yzhang.markdown-all-in-one",
+        "DavidAnson.vscode-markdownlint",
         "coenraads.bracket-pair-colorizer",
         "zhuangtongfa.material-theme",
         "visualstudioexptteam.vscodeintellicode",
         "VisualStudioExptTeam.intellicode-api-usage-examples",
         "streetsidesoftware.code-spell-checker",
+        // Docker Support
+        "ms-azuretools.vscode-docker",
+        "ms-vscode-remote.remote-containers"
         // Python Support
         "ms-python.python",
         "ms-python.vscode-pylance",
         "magicstack.magicpython",
+        "ms-python.flake8",
         // Django Support
         "batisteo.vscode-django",
         "wholroyd.jinja",
@@ -61,17 +68,17 @@ Create file inside projects **.vscode/extensions.json**. Open EXTENSIONS and wri
         "formulahendry.auto-close-tag",
         "christian-kohler.npm-intellisense",
         "formulahendry.auto-rename-tag",
-        // Vue Support
-        "ishiyama.vue-autoimport",
-        "octref.vetur",
-        "sdras.vue-vscode-snippets",
+        "wix.vscode-import-cost",
         // Typescript Support
         "rbbit.typescript-hero",
         "stringham.move-ts",
         "pmneo.tsimporter",
-        // Docker Support
-        "ms-azuretools.vscode-docker",
-        "ms-vscode-remote.remote-containers"
+        // Vue Support
+        "ishiyama.vue-autoimport",
+        "octref.vetur",
+        "sdras.vue-vscode-snippets",
+        // React support
+        "dsznajder.es7-react-js-snippets",
     ]
 }
 ```
