@@ -21,17 +21,15 @@ Install mysql_workbench from [Here](https://dev.mysql.com/downloads/workbench/)
 sudo mysql -u root -p
 ```
 
-Then
 ```sql
-    show databases;
-    use mysql
-    update user set plugin='mysql_native_password' where user='root';
-    if you want to change password:
-        ALTER USER 'root'@'localhost' IDENTIFIED BY 'new_password';
-    FLUSH PRIVILEGES;
+show databases;
+use mysql
+update user set plugin='mysql_native_password' where user='root';
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'new_password';
+FLUSH PRIVILEGES;
 ```
 
-**Create new user**
+### Create new user
 
 ```sql
 CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'password';
