@@ -136,7 +136,7 @@ connection_map = {
 
 
 @socket_manager.handler(MessageType.NEW_MESSAGE.value)
-async def new_message_handler(
+def new_message_handler(
     websocket: WebSocket,
     client_id: int,
     data: dict,
@@ -145,7 +145,7 @@ async def new_message_handler(
     data["sender"] = {"client_id": client_id}
 
     client_ids = connection_map.get(client_id, [])
-    await socket_manager.broadcast_to_chat(client_ids, data)
+    socket_manager.broadcast_to_chat(client_ids, data)
 
 
 router = APIRouter()
